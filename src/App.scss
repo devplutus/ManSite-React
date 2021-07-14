@@ -1,0 +1,122 @@
+// Font-Awesome
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
+@import './assets/scss/variables';
+@import './assets/scss/mixins';
+
+* {
+  font-family: Montserrat;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  color: $text-color;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  user-select: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;  
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html, body, #app {
+  width: 100vw;
+  height: 100vh;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(155deg, $main-color, $main-sub-color);
+}
+
+#main_container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  z-index: 1;
+}
+
+#main_content {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
+}
+
+#main_content_slide {
+  height: 100%;
+  width: 0%;
+  overflow-y: hidden;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+  transition: width 1s ease-in-out;
+  .content {
+    margin-bottom: 100px;
+  }
+  .content:last-child {
+    margin-bottom: 0;
+  }
+  &.show {
+    width: 100%;
+  }
+}
+
+// 백그라운드가 같이 움직여서 Mobile일 때 구조 변경.
+#m_main_content {
+  height: 100vh;
+  padding: 10px;
+  padding-top: $menu-height + 30px;
+  overflow-y: scroll;
+  .content {
+    margin-top: 50px;
+  }
+  .content:last-child {
+    margin-bottom: 130px;
+  }
+}
+
+@include mobile {
+  #main_container {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100%;
+    text-align: center;
+  }
+}
+
+@include tablet {
+  #main_container {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #main_content {
+    width: 100%;
+    display: inline-block;
+    padding-top: $menu-height + 20px;
+    padding-bottom: $menu-height + 50px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex-direction: column;
+  }
+}
+
+@include desktop {
+  #main_container {
+    min-width: 1040px;
+    height: 700px;
+    width: 100%;
+    max-width: 1240px;
+  }
+}

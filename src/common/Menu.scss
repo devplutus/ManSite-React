@@ -1,0 +1,167 @@
+@import '../assets/scss/variables';
+@import '../assets/scss/mixins';
+
+$menu-item-height: 75px;
+
+@mixin menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: inherit;
+  * {
+    transition: width 0.2s;
+  }
+}
+
+@mixin menu_tablet {
+  width: inherit;
+  position: fixed;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  .item {
+    width: 100%;
+    height: $menu-item-height;
+  }
+}
+
+@mixin menu_mobile {
+  @include menu_tablet;
+  height: $menu-height;
+  font-size: 0.8em;
+  margin-bottom: 10px;
+  border-radius: 0 0 5px 5px;
+  z-index: 1;
+  padding-top: 10px;
+  .item:hover {
+    background: unset !important;
+  }
+}
+
+@mixin menu_item {
+  height: $menu-item-height;
+  border-radius: inherit;
+  * {
+    display: block;
+    text-align: center;
+  }
+  i {
+    font-size: 1.2em;
+    padding-bottom: 10px;
+  }
+  font-size: 0.9em;
+  padding: 15px 0;
+}
+
+#menu_container {
+  position: relative;
+  width: 10%;
+  background: white;
+  margin-right: 10px;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+}
+
+#menu {
+  @include menu;
+  .item {
+    cursor: pointer;
+    @include menu_item;
+  }
+  .item:hover {
+    background: #eee;
+  }
+}
+
+#menu_selected {
+  @include menu;
+  position: absolute;
+  transition: 0.5s;
+  width: 100%;
+  height: $menu-item-height;
+  left: 0;
+  top: 0;
+  background: $main-color;
+  overflow: hidden;
+  box-shadow: inherit;
+  .item {
+    @include menu_item;
+    * {
+      color: white;
+    }
+  }
+}
+
+#menu_selected_items {
+  position: relative;
+  transition: 0.5s;
+}
+
+// Mobile
+@include mobile {
+  #menu_container {
+    position: fixed;
+    height: $menu-height;
+    width: inherit;
+    z-index: 1;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 10px;
+  }
+
+  #menu {
+    @include menu_mobile;
+  }
+
+  #menu_selected {
+    @include menu_mobile;
+    flex-direction: column;
+    align-items: initial;
+    position: absolute;
+    width: 100px;
+    top: 0;
+    left: 0;
+  }
+
+  #menu_selected_items {
+    height: $menu-item-height;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+// Tablet
+@include tablet {
+  #menu_container {
+    position: relative;
+    height: $menu-height;
+    width: inherit;
+    z-index: 1;
+    border-radius: 0;
+    margin-bottom: 10px;
+    margin-right: 0px;
+  }
+
+  #menu {
+    @include menu_tablet;
+  }
+
+  #menu_selected {
+    @include menu_tablet;
+    flex-direction: column;
+    align-items: initial;
+    position: absolute;
+    width: 100px;
+    top: 0;
+    left: 0;
+  }
+
+  #menu_selected_items {
+    height: $menu-item-height;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

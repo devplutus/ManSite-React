@@ -1,0 +1,48 @@
+@import '../assets/scss/variables';
+@import '../assets/scss/mixins';
+
+.knowledge {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  margin: 15px 0;
+
+  .knowledge_check {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+      font-size: 1.7em;
+      opacity: 0;
+      transition: 1s;
+      color: $chart-background;
+      transform: translateY(-20px);
+      &.active {
+        opacity: 1;
+        color: $main-color;
+        transform: translateY(0px);
+      }
+    }
+  }
+
+  .knowledge_content {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    span {
+      display: block;
+    }
+
+    .knowledge_title {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    .knowledge_sub_title {
+      font-size: 0.8em;
+    }
+  }
+}

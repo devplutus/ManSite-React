@@ -1,0 +1,17 @@
+@import '../assets/scss/variables';
+
+.resume_subtitle {
+  width: 100%;
+  font-size: 1.3em;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  i {
+    margin-right: 10px;
+    color: $main-color;
+  }
+  span {
+    font-weight: 500;
+  }
+}

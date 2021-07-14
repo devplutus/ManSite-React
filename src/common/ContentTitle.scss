@@ -1,0 +1,26 @@
+@import '../assets/scss/variables';
+
+.content_title {
+  margin-bottom: 20px;
+  text-align: left;
+  span {
+    font-size: 1.6em;
+    font-weight: bolder;
+    color: transparent;
+    background: linear-gradient(90deg, $main-color, $main-color 50%,#cecece 0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 200% 100%;
+    background-position: 0%;
+    animation: toLeft 4s ease-in-out infinite;
+  }
+}
+
+@keyframes toLeft {
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 200%;
+  }
+}

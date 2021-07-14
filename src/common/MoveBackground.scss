@@ -1,0 +1,29 @@
+@import '../assets/scss/variables';
+
+#movebackground {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.background_rect {
+  border-radius: 50%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.3);
+  animation-name: move;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-1500px);
+  }
+}
