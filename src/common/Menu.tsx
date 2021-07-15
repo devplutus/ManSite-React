@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './Menu.scss'
 
 const menuItems = [
@@ -23,52 +23,86 @@ const menuItems = [
 
 const menuId = menuItems.map(m => m.title.toLowerCase())
 
-const Menu = ({ isMobile, changeMenu }) => {
+const Menu = ({ isMobile }) => {
   const [page, setPage] = useState(0)
   const [isMove, setIsMove] = useState(false)
 
-  const moveMenu = (index: number, callback=null) => {
-    // Mobile & Tablet
-    const menu = document.getElementById('menu')
-    const width = menu.getElementsByClassName('item')[0].clientWidth
-    const menuSelected = document.getElementById('menu_selected')
-    const menuSelectedItem = document.getElementById('menu_selected_items')
-    menuSelected.style.left = isMobile ? `${width * index}px` : '0'
-    menuSelected.style.top = isMobile ? '0' : `${75 * index}px`
-    menuSelectedItem.style.right = isMobile ? `${width * index}px` : '0'
-    menuSelectedItem.style.bottom = isMobile ? '0' : `${75 * index}px`
-    
-    if (page !== index) {
-      if (callback) {
-        setIsMove(true)
-        callback(index)
-        setIsMove(false)
-      }
-      setPage(index)
+  const menuContainer = useRef()
+  const menu = useRef()
+  const menuSelected = useRef()
+  const menuSelectedItems = useRef()
+
+  const moveMenu = (index: number, onlyMenu=false) => {
+    // Move Selected Menu
+    const width = menu.current.getElementsByClassName('item')[0].clientWidth
+    menuSelected.current.style.left = isMobile ? `${width * index}px` : '0'
+    menuSelected.current.style.top = isMobile ? '0' : `${75 * index}px`
+    menuSelectedItems.current.style.right = isMobile ? `${width * index}px` : '0'
+    menuSelectedItems.current.style.bottom = isMobile ? '0' : `${75 * index}px`
+
+    // Move Content
+    const content = document.getElementById(isMobile ? 'm_main_content' : 'main_content_slide')
+    const divInMenu = {
+      profile: document.getElementById('profile'),
+      resume: document.getElementById('resume'),
+      portfolio: document.getElementById('portfolio'),
     }
+
+    if (!isMobile) {
+      if (index === 0) {
+        content.classList.remove('show')
+        menuContainer.current.style.width = '10%'
+        divInMenu.profile.classList.remove('large')
+      } else {
+        content.classList.add('show')
+        menuContainer.current.style.width = '20%'
+        divInMenu.profile.classList.add('large')
+        divInMenu[menuId[index]].scrollIntoView({
+          behavior: 'smooth'
+        })
+      }
+    } else {
+      if (!onlyMenu) {
+        content.scrollTo({
+          top: divInMenu[menuId[index]].offsetTop - 105,
+          behavior: 'smooth'
+        })
+      }
+      if (page !== index && !onlyMenu) {
+        setIsMove(true)
+        const interval = setInterval(() => {
+          if (content.scrollTop === divInMenu[menuId[index]].offsetTop - 105) {
+            setIsMove(false)
+            clearInterval(interval)
+          }
+        }, 100)
+      }
+    }
+    setPage(index)
   }
 
   const resize = () => {
-    const menu = document.getElementById('menu')
-    const width = menu.getElementsByClassName('item')[0].clientWidth
-    document.getElementById('menu_selected').style.width = `${width}px`
-    document.getElementById('menu_selected_items').style.width = `${menu.clientWidth}px`
-    moveMenu(page)
+    const width = menu.current.getElementsByClassName('item')[0].clientWidth
+    menuSelected.current.style.width = `${width}px`
+    menuSelectedItems.current.style.width = `${menu.current.clientWidth}px`
+    moveMenu(page, true)
   }
 
   const checkContentByScroll = () => {
     if (isMove) return
     
-    const menuHeight = document.getElementById('menu_container').clientHeight
+    const menuHeight = menuContainer.current.clientHeight
     const { bottom: currentBottom } = document.getElementById(menuId[page]).getBoundingClientRect()
+
     if (page !== 0) {
       const { bottom: prevBottom } = document.getElementById(menuId[page-1]).getBoundingClientRect()
       if (prevBottom > menuHeight) {
-        moveMenu(page-1)
+        moveMenu(page-1, true)
       }
     }
+
     if (currentBottom <= menuHeight) {
-      moveMenu(page+1)
+      moveMenu(page+1, true)
     }
   }
 
@@ -80,8 +114,8 @@ const Menu = ({ isMobile, changeMenu }) => {
       window.addEventListener('resize', resize)
       mainContent.addEventListener('scroll', checkContentByScroll)
       return () => {
-        document.getElementById('menu_selected').setAttribute('style', '')
-        document.getElementById('menu_selected_items').setAttribute('style', '')
+        menuSelected.current.setAttribute('style', '')
+        menuSelectedItems.current.setAttribute('style', '')
         window.removeEventListener('resize', resize)
         mainContent.removeEventListener('scroll', checkContentByScroll)
       }  
@@ -90,8 +124,8 @@ const Menu = ({ isMobile, changeMenu }) => {
   })
 
   return (
-    <div id="menu_container">
-      <div id="menu">
+    <div ref={menuContainer} id="menu_container">
+      <div ref={menu} id="menu">
         {menuItems.map((item, index) => {
           return (
             <div
@@ -99,7 +133,7 @@ const Menu = ({ isMobile, changeMenu }) => {
               className="item"
               key={`menuItem${item.icon}`}
               onClick={() => {
-                moveMenu(index, changeMenu)
+                moveMenu(index)
               }}
             >
               <i className={`fas ${item.icon}`} />
@@ -108,8 +142,8 @@ const Menu = ({ isMobile, changeMenu }) => {
           )
         })}
       </div>
-      <div id="menu_selected">
-        <div id="menu_selected_items">
+      <div ref={menuSelected} id="menu_selected">
+        <div ref={menuSelectedItems} id="menu_selected_items">
           {menuItems.map((item) => {
             return (
               <div className="item" key={`menuItem${item.icon}`}>
