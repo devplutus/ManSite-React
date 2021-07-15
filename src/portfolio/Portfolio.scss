@@ -1,3 +1,6 @@
+@import '../assets/scss/variables';
+@import '../assets/scss/mixins';
+
 #portfolio {
   width: 100%;
   height: 100%;
@@ -6,4 +9,42 @@
   background: white;
   padding: 20px;
   overflow-y: scroll;
+}
+
+.portfolio_container {
+  padding: 0 10px;
+  display: flex;
+  .portfolio_content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  .portfolio_content:nth-child(odd) {
+    border-right: 1px solid #eee;
+  }
+}
+
+@include mobile {
+  #portfolio {
+    height: auto;
+  }
+  .portfolio_container {
+    flex-wrap: wrap;
+    .portfolio_content {
+      margin-bottom: 20px;
+    }
+    .portfolio_content:nth-child(odd) {
+      border-right: none;
+    }
+  } 
+}
+
+@include tablet {
+  #portfolio {
+    height: auto;
+  }
 }
