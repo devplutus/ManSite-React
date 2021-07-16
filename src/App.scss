@@ -28,6 +28,13 @@ html, body, #app {
   height: 100vh;
 }
 
+body {
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+
 #app {
   display: flex;
   justify-content: center;
@@ -40,6 +47,7 @@ html, body, #app {
   justify-content: center;
   align-items: start;
   z-index: 1;
+  overflow: -moz-hidden-unscrollable;
 }
 
 #main_content {
@@ -71,7 +79,7 @@ html, body, #app {
 
 // 백그라운드가 같이 움직여서 Mobile일 때 구조 변경.
 #m_main_content {
-  height: 100vh;
+  height: 100%;
   padding: 10px;
   padding-top: $menu-height + 30px;
   overflow-y: scroll;
@@ -88,7 +96,7 @@ html, body, #app {
     position: relative;
     display: block;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     text-align: center;
   }
 }
