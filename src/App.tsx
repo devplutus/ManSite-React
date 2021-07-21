@@ -7,6 +7,7 @@ import Profile from './profile/Profile'
 import Menu from './common/Menu'
 import Resume from './resume/Resume'
 import Portfolio from './portfolio/Portfolio'
+import Contact from './contact/Contact'
 
 const App = () => {
   const ContentDiv = useRef()
@@ -37,6 +38,7 @@ const App = () => {
             <div ref={ContentDiv} id="main_content_slide">
               <Resume className="content" isMobile={isMobile} />
               <Portfolio className="content" isMobile={isMobile} />
+              <Contact className="content" isMobile={isMobile} />
             </div>
           </div>
         ) : (
@@ -46,6 +48,7 @@ const App = () => {
             <Profile />
             <Resume className="content" isMobile={isMobile} />
             <Portfolio className="content" isMobile={isMobile} />
+            <Contact className="content" isMobile={isMobile} />
           </div>
           </>
         )}

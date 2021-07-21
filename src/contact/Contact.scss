@@ -1,0 +1,50 @@
+@import '../assets/scss/variables';
+@import '../assets/scss/mixins';
+
+#contact {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 2px 4px 15px 3px rgba(0, 0, 0, 0.42);
+  background: white;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.contact_container {
+  padding: 0 10px;
+  display: flex;
+  .contact_content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  .contact_content:nth-child(odd) {
+    border-right: 1px solid #eee;
+  }
+}
+
+@include mobile {
+  #contact {
+    height: auto;
+  }
+  .contact_container {
+    flex-wrap: wrap;
+    .contact_content {
+      margin-bottom: 20px;
+    }
+    .contact_content:nth-child(odd) {
+      border-right: none;
+    }
+  } 
+}
+
+@include tablet {
+  #contact {
+    height: auto;
+  }
+}

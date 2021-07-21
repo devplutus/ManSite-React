@@ -46,6 +46,7 @@ const Menu = ({ isMobile }) => {
       profile: document.getElementById('profile'),
       resume: document.getElementById('resume'),
       portfolio: document.getElementById('portfolio'),
+      contact: document.getElementById('contact'),
     }
 
     if (!isMobile) {
