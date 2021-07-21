@@ -1,49 +1,78 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import * as React from 'react'
 import { useEffect, useRef } from 'react'
 import './PortfolioModal.scss'
+import { Skill, Langauge } from './portfolioInfo'
 
-const PortfolioModal = ({ closeEvent }) => {
+const PortfolioModal = ({ closeEvent, preview, skills, languages, features }) => {
   const modalContent = useRef()
 
   useEffect(() => {
     setTimeout(() => {
-      (modalContent.current as HTMLDivElement).classList.add('show');
+      ;(modalContent.current as HTMLDivElement).classList.add('show')
     }, 100)
   })
 
   const closeModal = () => {
-    (modalContent.current as HTMLDivElement).classList.remove('show');
+    ;(modalContent.current as HTMLDivElement).classList.remove('show')
     setTimeout(closeEvent, 300)
   }
 
   return (
-    <div className='portfolio_modal_back'>
-      <div ref={modalContent} className='portfolio_modal'>
-        <div className='portfolio_modal_header'>
+    <div className="portfolio_modal_back">
+      <div ref={modalContent} className="portfolio_modal glass">
+        <div className="portfolio_modal_header">
           <i role="button" className="far fa-times-circle" onClick={closeModal} />
         </div>
-        <div className='portfolio_modal_body'>
-          <div className='portfolio_modal_carousel'>
-            <div />
-            <div />
-            <div />
+        <div className="portfolio_modal_body">
+          <div className="portfolio_modal_carousel">
+            {
+              preview ?
+              <div className="carousel_child" style={{ background: `url('/images/portfolio/preview/${preview[0]}')` }} /> :
+              <div className="no_image">
+                <i className="fas fa-eye-slash" />
+                <span>Can&#39;t attach image as corporate request</span>
+              </div>
+              
+            }
           </div>
-          <div className='portfolio_modal_content'>
-            <div className='portfolio_modal_desc'>
-              <div>Framwork</div>
-              <div>test</div>
+          <div className="portfolio_modal_content">
+            <div className="container">
+              <div className="title">Skills</div>
+              <div className="body">
+                {skills.map((skill: Skill) => (
+                  <div className="badge" key={skill.name} style={{
+                    background: skill.background,
+                    color: skill.color
+                  }}>
+                    {skill.name}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className='portfolio_modal_desc'>
-              <div>Languages</div>
-              <div>test</div>
+            <div className="container">
+              <div className="title">Languages</div>
+              <div className="body">
+                {languages.map((language: Langauge) => (
+                  <div className="badge" key={language.name} style={{
+                    background: language.background,
+                    color: language.color
+                  }}>
+                    {language.name}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className='portfolio_modal_desc'>
-              <div>Features</div>
-              <div>
-                <span>- test1</span>
-                <span>- test2</span>
-                <span>- test3</span>
+            <div className="container">
+              <div className="title">Features</div>
+              <div className="body column">
+                {features.map((feature, i) => (
+                  <div className="feature" key={new Date().getTime() + i}>
+                    <i className='fas fa-check' />
+                    <span>{feature}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

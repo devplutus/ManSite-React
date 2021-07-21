@@ -8,7 +8,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(22, 22, 35, 0.8);
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -17,7 +17,7 @@
 
 .portfolio_modal {
   opacity: 0;
-  max-width: 1000px;
+  max-width: 750px;
   width: 60%;
   height: 80%;
   background: white;
@@ -29,16 +29,25 @@
     opacity: 1;
     transform: translateY(0px);
   }
+  &.glass {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 30px 30px 50px rgba(0, 0, 0, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white !important;
+  }
 }
 
 .portfolio_modal_header {
-  height: 10%;
+  height: 7%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   i {
-    color: $main-color;
+    color: white;
     font-size: 2.3em;
-    margin-top: 10px;
     margin-right: 10px;
     cursor: pointer;
   }
@@ -47,55 +56,153 @@
 .portfolio_modal_body {
   width: 100%;
   height: 90%;
+}
 
-  .portfolio_modal_carousel {
-    width: 100%;
-    height: 60%;
-    background: $main-color;
+.portfolio_modal_content {
+  width: 100%;
+  height: 50%;
+  padding: 30px;
+  text-align: center;
+  font-size: 1.1em;
+  overflow-y: scroll;
+
+  .container {
+    display: inline-block;
+    width: 70%;
+    height: auto;
+    margin-bottom: 40px;
+    text-align: left;
   }
 
-  .portfolio_modal_content {
+  .container:last-child {
+    margin-bottom: 0;
+  }
+
+  .title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .body {
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 40%;
-    padding: 40px;
-    text-align: left;
-    font-size: 1.1em;
+    flex-wrap: wrap;
+    color: white;
+  }
+
+  .badge {
+    background-color: $main-color;
+    color: white;
+    font-size: 0.8em;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 4px 10px;
+  }
+
+  .feature {
+    width: 90%;
+    margin-bottom: 15px;
+    display: flex;
+    i {
+      margin-right: 15px;
+      color: white;
+    }
+    span {
+      font-size: 0.9em;
+      width: 100%;
+      word-break: keep-all;
+      color: white;
+    }
+  }
+}
+
+.portfolio_modal_carousel {
+  width: 100%;
+  height: 50%;
+  background: $main-color;
+
+  .carousel_child {
+    width: 100%;
+    height: 100%;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+  .no_image {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    * {
+      display: block;
+      color: white;
+    }
+    i {
+      font-size: 5em;
+      margin-bottom: 60px;
+    }
+    span {
+      font-size: 1.3em;
+    }
+  }
+}
 
-    .portfolio_modal_desc {
-      margin-bottom: 20px;
-      display: flex;
-      div:nth-child(1) {
-        color: $main-color;
-        display: inline;
-        width: 40%;
-        font-weight: bold;
+@include mobile {
+  .portfolio_modal_header {
+    height: 7%;
+    font-size: 10px;
+  }
+  .portfolio_modal {
+    width: 90%;
+    height: 90%;
+  }
+  .portfolio_modal_carousel {
+    height: 45%;
+  }
+  .portfolio_modal_content {
+    height: 55%;
+    padding: 20px;
+
+    .container {
+      width: 100%;
+      margin-bottom: 25px;
+    }
+
+    .title {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+
+    .body {
+      justify-content: flex-start;
+    }
+
+    .feature {
+      width: 100%;
+      font-size: 0.9em;
+    }
+  }
+  .portfolio_modal_carousel {
+    .no_image {
+      i {
+        font-size: 4em;
       }
-      div:nth-child(2) {
-        color: $main-color;
-        font-size: 0.9em;
-        span {
-          display: block;
-          margin-bottom: 10px;
-        }
+      span {
+        font-size: 1em;
       }
     }
   }
 }
 
-
-@include mobile {
- .portfolio_modal {
-   width: 90%;
-   height: 90%;
- }
-}
-
 @include tablet {
- .portfolio_modal {
-   width: 90%;
-   height: 90%;
- }
+  .portfolio_modal {
+    width: 90%;
+    height: 90%;
+  }
 }
