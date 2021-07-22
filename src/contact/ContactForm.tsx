@@ -12,22 +12,43 @@ const ContactForm = ({ isMobile }) => {
   const MessageInput = useRef()
 
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
 
   const sendEmail = async () => {
     if (!checkText(NameInput) || !checkEmail() || !checkText(MessageInput)) {
       return 0
     }
-    const { data } = await axios.post(API_URL, 
-    {
-      name: '',
-      email: '',
-      message: '',
-    }, 
-    {
-      headers: {
-        'x-api-key': 'O1xPstMeKV8qPgNiLrQyVMItz9ert6A5yFpuSQH7'
+
+    setLoading(true)
+
+    try {
+      const { data: {
+        success
+      }} = await axios.post(API_URL, 
+      {
+        name: (NameInput.current as HTMLInputElement).value,
+        email: (EmailInput.current as HTMLInputElement).value,
+        message: (MessageInput.current as HTMLInputElement).value.replace(/\r\n|\r|\n/g, '<br/>'),
+      }, 
+      {
+        headers: {
+          'x-api-key': 'O1xPstMeKV8qPgNiLrQyVMItz9ert6A5yFpuSQH7'
+        }
+      })
+      if (!success) {
+        throw new Error()
+      } else {
+        setSuccess(true)
+        setTimeout(() => setSuccess(false), 1000)
       }
-    })
+    } catch {
+      setError(true)
+      setTimeout(() => setError(false), 1000)
+    } finally {
+      setLoading(false)
+    }
+
     return 0
   }
 
@@ -73,9 +94,10 @@ const ContactForm = ({ isMobile }) => {
           onChange={() => checkText(MessageInput, 10)} />
       </div>
       <div className='contact_form_field center'>
-        <button className='contact_form_button' type='button' onClick={sendEmail}>
-          SEND MESSAGE
-          <i className='fas fa-spinner' />
+        <button className={`contact_form_button ${error && 'error'} ${success && 'success'}`} type='button' onClick={sendEmail} disabled={loading}>
+          {
+            loading ? <i className='fas fa-spinner' /> : 'SEND MESSAGE'
+          }
         </button>
       </div>
     </div>

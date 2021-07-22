@@ -60,8 +60,43 @@
   color: white;
   cursor: pointer;
   transition: 1s;
+
+  i {
+    animation: loading 1s infinite;
+    color: white;
+  }
   
   &:hover {
     background: #6f81b1;
+  }
+
+  &.error {
+    animation: vibrate 0.05s alternate;
+    animation-iteration-count: 15;
+    background: #ff6f6f;
+  }
+
+  &.success {
+    background: #309041;
+  }
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vibrate {
+  from {
+    transform: translateX(-2px);
+  }
+
+  to {
+    transform: translateX(2px);
   }
 }
