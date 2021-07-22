@@ -24,7 +24,7 @@ const menuItems = [
 const menuId = menuItems.map(m => m.title.toLowerCase())
 
 const Menu = ({ isMobile }) => {
-  const [page, setPage] = useState(3)
+  const [page, setPage] = useState(0)
   const [isMove, setIsMove] = useState(false)
 
   const menuContainer = useRef()
@@ -64,6 +64,13 @@ const Menu = ({ isMobile }) => {
       }
     } else {
       if (!onlyMenu) {
+        // Momentum Scroll로 인해서 억지로 스크롤 Disable
+        content.style.overflow = 'hidden'
+        const { scrollTop } = content
+        content.scrollTop = scrollTop
+        setTimeout(() => {
+          content.style.overflow = 'scroll'
+        })
         content.scrollTo({
           top: divInMenu[menuId[index]].offsetTop - 105,
           behavior: 'smooth'
@@ -91,7 +98,7 @@ const Menu = ({ isMobile }) => {
 
   const checkContentByScroll = () => {
     if (isMove) return
-    
+
     const menuHeight = menuContainer.current.clientHeight
     const { bottom: currentBottom } = document.getElementById(menuId[page]).getBoundingClientRect()
 
@@ -108,7 +115,6 @@ const Menu = ({ isMobile }) => {
   }
 
   useEffect(() => {
-    moveMenu(page)
     if (isMobile) {
       const mainContent = document.getElementById('m_main_content')
 

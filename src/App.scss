@@ -83,6 +83,7 @@ body {
   padding: 10px;
   padding-top: $menu-height + 30px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   .content {
     margin-top: 50px;
   }
