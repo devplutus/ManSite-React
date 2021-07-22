@@ -13,7 +13,6 @@
 
 .contact_container {
   padding: 0 10px;
-  display: flex;
   .contact_content {
     width: 100%;
     display: flex;
@@ -21,11 +20,37 @@
     align-items: center;
     justify-content: center;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
   }
-  .contact_content:nth-child(odd) {
-    border-right: 1px solid #eee;
+}
+
+.contact {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.contact_icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid $main-color;
+  font-size: 1.5em;
+  i {
+    color: $main-color;
   }
+}
+.contact_value {
+  width: 70%;
+  text-align: center;
+  color: $main-color;
+  font-weight: bold;
+  font-size: 0.9em;
+  user-select: all;
 }
 
 @include mobile {
@@ -35,12 +60,20 @@
   .contact_container {
     flex-wrap: wrap;
     .contact_content {
-      margin-bottom: 20px;
+      padding-top: 10px;
     }
-    .contact_content:nth-child(odd) {
-      border-right: none;
-    }
-  } 
+  }
+  .contact {
+    width: 100%;
+  }
+  .contact_icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+  .contact_value {
+    font-size: 0.9em;
+  }
 }
 
 @include tablet {

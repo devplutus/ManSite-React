@@ -24,7 +24,7 @@ const menuItems = [
 const menuId = menuItems.map(m => m.title.toLowerCase())
 
 const Menu = ({ isMobile }) => {
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(3)
   const [isMove, setIsMove] = useState(false)
 
   const menuContainer = useRef()
@@ -108,6 +108,7 @@ const Menu = ({ isMobile }) => {
   }
 
   useEffect(() => {
+    moveMenu(page)
     if (isMobile) {
       const mainContent = document.getElementById('m_main_content')
 
