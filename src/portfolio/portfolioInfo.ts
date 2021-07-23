@@ -160,6 +160,11 @@ export const portfolioInfo: Portfolio[] = [
     agency: 'MrBot',
     logoFileName: 'mrbot.png',
     detail: {
+      preview: [
+        'mrbot_1.png',
+        'mrbot_2.png',
+        'mrbot_3.png',
+      ],
       skills: [
         skills.vue,
         skills.electron,
