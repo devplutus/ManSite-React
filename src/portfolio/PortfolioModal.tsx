@@ -6,17 +6,17 @@ import './PortfolioModal.scss'
 import { Skill, Langauge } from './portfolioInfo'
 import Carousel from '../common/Carousel'
 
-const PortfolioModal = ({ closeEvent, preview, skills, languages, features }) => {
+const PortfolioModal = ({ closeEvent, preview, skills, languages, features, isMobile }) => {
   const modalContent = useRef()
 
   useEffect(() => {
     setTimeout(() => {
-      ;(modalContent.current as HTMLDivElement).classList.add('show')
+      (modalContent.current as HTMLDivElement).classList.add('show')
     }, 100)
   })
 
   const closeModal = () => {
-    ;(modalContent.current as HTMLDivElement).classList.remove('show')
+    (modalContent.current as HTMLDivElement).classList.remove('show')
     setTimeout(closeEvent, 300)
   }
 
@@ -28,7 +28,7 @@ const PortfolioModal = ({ closeEvent, preview, skills, languages, features }) =>
         </div>
         <div className="portfolio_modal_body">
           <div className="portfolio_modal_carousel">
-            <Carousel preview={preview} />
+            <Carousel preview={preview} isMobile={isMobile} />
           </div>
           <div className="portfolio_modal_content">
             <div className="container">

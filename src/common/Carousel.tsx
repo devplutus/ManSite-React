@@ -1,45 +1,124 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 import * as React from 'react'
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import './Carousel.scss'
 
-const Carousel = ({ preview }) => {
+const Carousel = ({ preview, isMobile }) => {
   const CarouselDiv = useRef(0)
 
-  let isDown = false
+  const SLIDE_GAP = 100
 
-  const [index, setIndex] = useState(0)
-  const [left, setLeft] = useState(0)
+  let index = 0
+  let isDown = false
+  let pos1 = 0
+  let pos2 = 0
+  let initTranslateX = 0
+
 
   if (!preview) {
     return <NoImage />
   }
 
-  const onSwipe = ({movementX}) => {
+  const onSwipe = (e) => {
     if (isDown) {
-      const carousel = (CarouselDiv.current as HTMLDivElement)
-      const scrollX = carousel.scrollLeft + movementX * -1
-      carousel.scrollLeft = scrollX
+      const MIN_LEFT = 0
+      const MAX_LEFT = document.getElementById(`carousel_child${preview.length-1}`).offsetLeft * -1
+      const carousel = CarouselDiv.current as HTMLDivElement
+
+      pos2 = pos1
+      if (e.type === 'mousemove') {
+        pos1 = (e as MouseEvent).clientX
+      } else {
+        pos1 = (e as TouchEvent).touches[0].clientX
+      }
+      pos2 -= pos1
+
+      let nextPos = (parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) || 0) - pos2
+      if (nextPos >= MIN_LEFT) nextPos = 0
+      else if(nextPos <= MAX_LEFT) nextPos = MAX_LEFT
+
+      carousel.style.transform = `translateX(${nextPos}px)`
     }
   }
 
-  const onMouseClickAndDown = ({ type }) => {
-    isDown = type === 'mousedown'
+  const onMouseClickAndDown = (e: Event) => {
+    const carousel = CarouselDiv.current as HTMLDivElement
+
+    if (e.type.indexOf('mouse') !== -1) {
+      isDown = e.type === 'mousedown'
+      if (isDown) pos1 = (e as MouseEvent).clientX
+    } else {
+      isDown = e.type === 'touchstart'
+      if (isDown) pos1 = (e as TouchEvent).touches[0].clientX
+    }
+
+    if (isDown) {
+      initTranslateX = (parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) * -1 || 0)
+    } else checkIndex()
   }
 
+  const checkIndex = () => {
+    const carousel = CarouselDiv.current as HTMLDivElement
+    const offsetLeft = (parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) * -1 || 0)
+    const gap = offsetLeft - initTranslateX
+
+    if (gap < -SLIDE_GAP && index !== 0) {
+      shiftSlide(index - 1)
+    } else if (gap > SLIDE_GAP && index !== preview.length - 1) {
+      shiftSlide(index + 1)
+    }
+  }
+
+  const shiftSlide = (idx: number) => {
+    const carousel = CarouselDiv.current as HTMLDivElement
+    const { clientWidth } = document.getElementById('carousel_child0')
+    carousel.classList.add('transition')
+    carousel.style.transform = `translateX(${clientWidth * idx * -1}px)`
+    setTimeout(() => carousel.classList.remove('transition'), 100)
+    index = idx
+  }
+
+  useEffect(() => {
+    if (!preview || preview.length === 1) return 0
+
+    const carousel = CarouselDiv.current as HTMLDivElement
+    if (isMobile) {
+      carousel.addEventListener('touchstart', onMouseClickAndDown)
+      carousel.addEventListener('touchend', onMouseClickAndDown)
+      carousel.addEventListener('touchmove', onSwipe)
+      carousel.classList.add('transition')
+      return () => {
+        carousel.removeEventListener('touchstart', onMouseClickAndDown)
+        carousel.removeEventListener('touchend', onMouseClickAndDown)
+        carousel.removeEventListener('touchmove', onSwipe)
+      }
+    }
+
+    carousel.addEventListener('mousedown', onMouseClickAndDown)
+    carousel.addEventListener('mouseup', onMouseClickAndDown)
+    carousel.addEventListener('mouseleave', onMouseClickAndDown)
+    carousel.addEventListener('mousemove', onSwipe)
+    return () => {
+      carousel.removeEventListener('mousedown', onMouseClickAndDown)
+      carousel.removeEventListener('mouseup', onMouseClickAndDown)
+      carousel.removeEventListener('mouseleave', onMouseClickAndDown)
+      carousel.removeEventListener('mousemove', onSwipe)
+    }
+  })
+
   return (
-    <div ref={CarouselDiv} className="carousel">
-      {preview.map((p, i) => (
-        <div
-          key={i}
-          className="carousel_child"
-          onMouseDown={onMouseClickAndDown}
-          onMouseUp={onMouseClickAndDown}
-          onMouseMove={onSwipe}
-          style={{ background: `url('/images/portfolio/preview/${p}')` }}
-        />
-      ))}
+    <div className="carousel_container">
+      <div ref={CarouselDiv} className="carousel">
+        {preview.map((p, i) => (
+          <div
+            key={i}
+            id={`carousel_child${i}`}
+            className="carousel_child"
+            style={{ background: `url('/images/portfolio/preview/${p}')` }}
+          />
+        ))}
+      </div>
     </div>
   )
 }

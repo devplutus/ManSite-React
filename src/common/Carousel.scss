@@ -1,6 +1,12 @@
 @import '../assets/scss/variables';
 @import '../assets/scss/mixins';
 
+.carousel_container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .carousel {
   width: 100%;
   height: 100%;
@@ -8,7 +14,11 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  overflow: hidden;
+  position: relative;
+
+  &.transition {
+    transition: .1s ease-out;
+  }
 
   .carousel_child {
     width: 100%;
