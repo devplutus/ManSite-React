@@ -7,12 +7,12 @@ import './Carousel.scss'
 const Carousel = ({ preview, isMobile }) => {
   const CarouselDiv = useRef(0)
 
+  const [index, setIndex] = useState(0)
+
   const SLIDE_GAP = 100
 
-  let index = 0
-  let isDown = false
   let pos1 = 0
-  let pos2 = 0
+  let isDown = false
   let initTranslateX = 0
 
 
@@ -26,7 +26,7 @@ const Carousel = ({ preview, isMobile }) => {
       const MAX_LEFT = document.getElementById(`carousel_child${preview.length-1}`).offsetLeft * -1
       const carousel = CarouselDiv.current as HTMLDivElement
 
-      pos2 = pos1
+      let pos2 = pos1
       if (e.type === 'mousemove') {
         pos1 = (e as MouseEvent).clientX
       } else {
@@ -76,7 +76,7 @@ const Carousel = ({ preview, isMobile }) => {
     carousel.classList.add('transition')
     carousel.style.transform = `translateX(${clientWidth * idx * -1}px)`
     setTimeout(() => carousel.classList.remove('transition'), 100)
-    index = idx
+    setIndex(idx)
   }
 
   useEffect(() => {
@@ -119,6 +119,33 @@ const Carousel = ({ preview, isMobile }) => {
           />
         ))}
       </div>
+      <div className='carousel_count'>
+        {
+          preview.map((_, i) => (
+            <div className={`carousel_count_item ${i === index && 'active'}`} key={new Date().getTime() + i} />
+          ))
+        }
+      </div>
+      {
+        (preview && preview.length > 1) && (
+          <>
+          {
+            index !== 0 && (
+              <div role='button' className='carousel_buttons_left' onClick={() => shiftSlide(index-1)}>
+                <i className="far fa-arrow-alt-circle-left" />
+              </div>
+            )
+          }
+          {
+            index !== preview.length - 1 && (
+              <div className='carousel_buttons_right' onClick={() => shiftSlide(index+1)}>
+                <i className="far fa-arrow-alt-circle-right" />
+              </div>
+            )
+          }
+          </>
+        )
+      }
     </div>
   )
 }

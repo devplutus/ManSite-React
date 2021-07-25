@@ -5,6 +5,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .carousel {
@@ -44,6 +45,68 @@
     }
     span {
       font-size: 1.3em;
+    }
+  }
+}
+
+.carousel_count {
+  height: auto;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  padding: 5px;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+
+  .carousel_count_item {
+    height: 10px;
+    width: 10px;
+    background: $main-color;
+    border-radius: 50%;
+    margin: 0 5px;
+    &.active {
+      background: #eaeaea;
+    }
+  }
+}
+
+.carousel_buttons_left, .carousel_buttons_right {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  top: 50%;
+  font-size: 1em;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  &:hover {
+    font-size: 3em;
+  }
+  i {
+    color: $main-color;
+  }
+}
+
+.carousel_buttons_left {
+  left: 0;
+}
+
+.carousel_buttons_right {
+  right: 0;
+}
+
+@include mobile {
+  .carousel_buttons_left, .carousel_buttons_right {
+    &:hover {
+      font-size: 2.3em;
     }
   }
 }
