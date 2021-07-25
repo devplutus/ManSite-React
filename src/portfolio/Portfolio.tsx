@@ -11,8 +11,10 @@ import { portfolioInfo } from './portfolioInfo'
 
 const Portfolio = ({ className, isMobile }) => {
 
-  const [modal, setModal] = useState(false)
-  const [detail, setDetail] = useState({})
+  // const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(true)
+  // const [detail, setDetail] = useState({})
+  const [detail, setDetail] = useState(portfolioInfo[1].detail)
   const openModal = (selected) => {
     if (selected) {
       setDetail(selected)

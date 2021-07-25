@@ -4,6 +4,7 @@ import * as React from 'react'
 import { useEffect, useRef } from 'react'
 import './PortfolioModal.scss'
 import { Skill, Langauge } from './portfolioInfo'
+import Carousel from '../common/Carousel'
 
 const PortfolioModal = ({ closeEvent, preview, skills, languages, features }) => {
   const modalContent = useRef()
@@ -27,15 +28,7 @@ const PortfolioModal = ({ closeEvent, preview, skills, languages, features }) =>
         </div>
         <div className="portfolio_modal_body">
           <div className="portfolio_modal_carousel">
-            {
-              preview ?
-              <div className="carousel_child" style={{ background: `url('/images/portfolio/preview/${preview[0]}')` }} /> :
-              <div className="no_image">
-                <i className="fas fa-eye-slash" />
-                <span>Can&#39;t attach image as corporate request</span>
-              </div>
-              
-            }
+            <Carousel preview={preview} />
           </div>
           <div className="portfolio_modal_content">
             <div className="container">
