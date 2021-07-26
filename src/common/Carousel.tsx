@@ -15,7 +15,6 @@ const Carousel = ({ preview, isMobile }) => {
   let isDown = false
   let initTranslateX = 0
 
-
   if (!preview) {
     return <NoImage />
   }
@@ -23,7 +22,7 @@ const Carousel = ({ preview, isMobile }) => {
   const onSwipe = (e) => {
     if (isDown) {
       const MIN_LEFT = 0
-      const MAX_LEFT = document.getElementById(`carousel_child${preview.length-1}`).offsetLeft * -1
+      const MAX_LEFT = document.getElementById(`carousel_child${preview.length - 1}`).offsetLeft * -1
       const carousel = CarouselDiv.current as HTMLDivElement
 
       let pos2 = pos1
@@ -36,7 +35,7 @@ const Carousel = ({ preview, isMobile }) => {
 
       let nextPos = (parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) || 0) - pos2
       if (nextPos >= MIN_LEFT) nextPos = 0
-      else if(nextPos <= MAX_LEFT) nextPos = MAX_LEFT
+      else if (nextPos <= MAX_LEFT) nextPos = MAX_LEFT
 
       carousel.style.transform = `translateX(${nextPos}px)`
     }
@@ -54,33 +53,35 @@ const Carousel = ({ preview, isMobile }) => {
     }
 
     if (isDown) {
-      initTranslateX = (parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) * -1 || 0)
+      initTranslateX = parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) * -1 || 0
     } else checkIndex()
   }
 
   const checkIndex = () => {
     const carousel = CarouselDiv.current as HTMLDivElement
-    const offsetLeft = (parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) * -1 || 0)
+    const offsetLeft = parseFloat(carousel.style.transform.replace(/translateX\(|px\)/g, '')) * -1 || 0
     const gap = offsetLeft - initTranslateX
 
     if (gap < -SLIDE_GAP && index !== 0) {
-      shiftSlide(index - 1)
+      setIndex(index - 1)
     } else if (gap > SLIDE_GAP && index !== preview.length - 1) {
-      shiftSlide(index + 1)
+      setIndex(index + 1)
     }
   }
 
-  const shiftSlide = (idx: number) => {
+  const shiftSlide = () => {
     const carousel = CarouselDiv.current as HTMLDivElement
     const { clientWidth } = document.getElementById('carousel_child0')
     carousel.classList.add('transition')
-    carousel.style.transform = `translateX(${clientWidth * idx * -1}px)`
+    carousel.style.transform = `translateX(${clientWidth * index * -1}px)`
     setTimeout(() => carousel.classList.remove('transition'), 100)
-    setIndex(idx)
+    isDown = false
   }
 
   useEffect(() => {
     if (!preview || preview.length === 1) return 0
+    
+    shiftSlide()
 
     const carousel = CarouselDiv.current as HTMLDivElement
     if (isMobile) {
@@ -97,12 +98,10 @@ const Carousel = ({ preview, isMobile }) => {
 
     carousel.addEventListener('mousedown', onMouseClickAndDown)
     carousel.addEventListener('mouseup', onMouseClickAndDown)
-    carousel.addEventListener('mouseleave', onMouseClickAndDown)
     carousel.addEventListener('mousemove', onSwipe)
     return () => {
       carousel.removeEventListener('mousedown', onMouseClickAndDown)
       carousel.removeEventListener('mouseup', onMouseClickAndDown)
-      carousel.removeEventListener('mouseleave', onMouseClickAndDown)
       carousel.removeEventListener('mousemove', onSwipe)
     }
   })
@@ -119,33 +118,29 @@ const Carousel = ({ preview, isMobile }) => {
           />
         ))}
       </div>
-      <div className='carousel_count'>
-        {
-          preview.map((_, i) => (
-            <div className={`carousel_count_item ${i === index && 'active'}`} key={new Date().getTime() + i} />
-          ))
-        }
+      <div className="carousel_count">
+        {preview.map((_, i) => (
+          <div className={`carousel_count_item ${i === index && 'active'}`} key={new Date().getTime() + i} />
+        ))}
       </div>
-      {
-        (preview && preview.length > 1) && (
-          <>
-          {
-            index !== 0 && (
-              <div role='button' className='carousel_buttons_left' onClick={() => shiftSlide(index-1)}>
-                <i className="far fa-arrow-alt-circle-left" />
-              </div>
-            )
-          }
-          {
-            index !== preview.length - 1 && (
-              <div className='carousel_buttons_right' onClick={() => shiftSlide(index+1)}>
-                <i className="far fa-arrow-alt-circle-right" />
-              </div>
-            )
-          }
-          </>
-        )
-      }
+      {preview && preview.length > 1 && (
+        <>
+          <div
+            className="carousel_buttons_left"
+            style={{ display: index !== 0 ? 'flex' : 'none' }}
+            onClick={() => setIndex(index - 1)}
+          >
+            <i className="far fa-arrow-alt-circle-left" />
+          </div>
+          <div
+            className="carousel_buttons_right"
+            style={{ display: index !== preview.length - 1 ? 'flex' : 'none' }}
+            onClick={() => setIndex(index + 1)}
+          >
+            <i className="far fa-arrow-alt-circle-right" />
+          </div>
+        </>
+      )}
     </div>
   )
 }
