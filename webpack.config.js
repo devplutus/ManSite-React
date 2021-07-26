@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -52,6 +53,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
       favicon: path.resolve(__dirname, 'public/favicon.ico'),
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: './public/images',
+          to: 'images'
+        },
+        {
+          from: './public/favicon.ico',
+        }
+      ]
     })
   ]
 }
