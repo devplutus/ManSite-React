@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useRef, useEffect, useState } from 'react'
 import './Carousel.scss'
 
-const Carousel = ({ preview, isMobile }) => {
+const Carousel = ({ preview, isMobile, onChildClick }) => {
   const CarouselDiv = useRef(0)
 
   const [index, setIndex] = useState(0)
@@ -114,6 +114,7 @@ const Carousel = ({ preview, isMobile }) => {
             key={i}
             id={`carousel_child${i}`}
             className="carousel_child"
+            onClick={() => onChildClick(`/images/portfolio/preview/${p}`)}
             style={{ background: `url('/images/portfolio/preview/${p}')` }}
           />
         ))}
