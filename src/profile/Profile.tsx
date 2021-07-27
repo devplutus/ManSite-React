@@ -76,6 +76,7 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    setStop(false)
     typeJob(index)
     return () => {
       setStop(true)

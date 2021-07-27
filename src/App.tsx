@@ -26,9 +26,9 @@ const App = () => {
             <Menu />
             <Profile />
             <div ref={ContentDiv} id="main_content_slide">
-              <Resume className="content" isMobile={isMobile} />
-              <Portfolio className="content" isMobile={isMobile} />
-              <Contact className="content" isMobile={isMobile} />
+              <Resume className="content" />
+              <Portfolio className="content" />
+              <Contact className="content" />
             </div>
           </div>
         ) : (
@@ -36,9 +36,9 @@ const App = () => {
           <Menu />
           <div ref={ContentDiv} id="m_main_content">
             <Profile />
-            <Resume className="content" isMobile={isMobile} />
-            <Portfolio className="content" isMobile={isMobile} />
-            <Contact className="content" isMobile={isMobile} />
+            <Resume className="content" />
+            <Portfolio className="content" />
+            <Contact className="content" />
           </div>
           </>
         )}

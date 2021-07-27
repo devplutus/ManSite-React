@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import './Portfolio.scss'
 
 import ContentTitle from '../common/ContentTitle'
@@ -8,8 +8,11 @@ import PortfolioBox from './PortfolioBox'
 import PortfolioModal from './PortfolioModal'
 
 import { portfolioInfo } from './portfolioInfo'
+import { MainContext } from '../providers/mainProvider'
 
-const Portfolio = ({ className, isMobile }) => {
+const Portfolio = ({ className }) => {
+
+  const { isMobile } = useContext(MainContext)
 
   const [modal, setModal] = useState(false)
   const [detail, setDetail] = useState({

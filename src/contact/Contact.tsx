@@ -1,9 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import * as React from 'react'
+import { useContext } from 'react'
 import './Contact.scss'
 
 import ContentTitle from '../common/ContentTitle'
 import ContactForm from './ContactForm'
+import { MainContext } from '../providers/mainProvider'
 
 const contactInfo = [
   {
@@ -24,7 +26,9 @@ const contactInfo = [
   },
 ]
 
-const Contact = ({ className, isMobile }) => {
+const Contact = ({ className }) => {
+  const { isMobile } = useContext(MainContext)
+
   return (
     <div id="contact" className={className}>
       <ContentTitle title="CONTACT" />

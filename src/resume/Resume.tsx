@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import * as React from 'react'
+import { useContext } from 'react'
 import './Resume.scss'
 
 import { experience, educations, languages, codings, enviroments, knowledges } from './resumeInfo'
@@ -11,9 +12,10 @@ import BarChart from './chart/BarChart'
 import CircleChart from './chart/CircleChart'
 import DotChart from './chart/DotChart'
 import Knowledge from './Knowledge'
+import { MainContext } from '../providers/mainProvider'
 
-const Resume = ({ className, isMobile }) => {
-  
+const Resume = ({ className }) => {
+  const { isMobile } = useContext(MainContext)
   return (
     <div id="resume" className={className}>
 
