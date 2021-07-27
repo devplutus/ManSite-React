@@ -90,7 +90,7 @@ const ContactForm = ({ isMobile }) => {
         <textarea 
           ref={MessageInput} 
           className='contact_form_input'
-          cols='30' rows='10' 
+          cols={30} rows={10}
           onChange={() => checkText(MessageInput, 10)} />
       </div>
       <div className='contact_form_field center'>

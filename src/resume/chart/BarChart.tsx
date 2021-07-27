@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import './BarChart.scss'
 
 const BarChart = ({ name, value, isMobile }) => {
-  const chart = useRef(0)
+  const chart = useRef<HTMLDivElement>()
   const [animate, setAnimate] = useState(false)
 
   useEffect(() => {

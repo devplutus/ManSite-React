@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import './DotChart.scss'
 
 const DotChart = ({ name, value, isMobile }) => {
-  const chart = useRef(0)
+  const chart = useRef<HTMLDivElement>()
   const [animate, setAnimate] = useState(false)
 
   const startAnimation = async () => {
@@ -16,7 +16,7 @@ const DotChart = ({ name, value, isMobile }) => {
     }
 
     if (value % 10 !== 0) {
-      const lastDot = dots[Math.floor(value/10)];
+      const lastDot = dots[Math.floor(value/10)] as HTMLDivElement;
       const remain = value % 10 * 10
       lastDot.style.setProperty('--dot-chart-width', `${remain}%`)
       lastDot.classList.add('fill_value')

@@ -12,7 +12,12 @@ import { portfolioInfo } from './portfolioInfo'
 const Portfolio = ({ className, isMobile }) => {
 
   const [modal, setModal] = useState(false)
-  const [detail, setDetail] = useState({})
+  const [detail, setDetail] = useState({
+    preview: '',
+    skills: '',
+    languages: '',
+    features: '',
+  })
   // const [modal, setModal] = useState(true)
   // const [detail, setDetail] = useState(portfolioInfo[1].detail)
   const openModal = (selected) => {
@@ -27,7 +32,7 @@ const Portfolio = ({ className, isMobile }) => {
   return (
     <div id="portfolio" className={className}>
       {
-        modal && <PortfolioModal {...detail} closeEvent={() => setModal(false)} isMobile={isMobile} />
+        (modal) && <PortfolioModal {...detail} closeEvent={() => setModal(false)} isMobile={isMobile} />
       }
       <ContentTitle title="PORTFOLIO" />
       <div className="portfolio_container">

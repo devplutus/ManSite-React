@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import './Knowledge.scss'
 
 const Knowledge = ({ title, subTitle, isMobile }) => {
-  const knowledge = useRef(0)
+  const knowledge = useRef<HTMLDivElement>()
   const [animate, setAnimate] = useState(false)
 
   useEffect(() => {

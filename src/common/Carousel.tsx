@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 import * as React from 'react'
@@ -5,7 +6,7 @@ import { useRef, useEffect, useState } from 'react'
 import './Carousel.scss'
 
 const Carousel = ({ preview, isMobile, onChildClick }) => {
-  const CarouselDiv = useRef(0)
+  const CarouselDiv = useRef<HTMLDivElement>()
 
   const [index, setIndex] = useState(0)
 
@@ -23,7 +24,7 @@ const Carousel = ({ preview, isMobile, onChildClick }) => {
     if (isDown) {
       const MIN_LEFT = 0
       const MAX_LEFT = document.getElementById(`carousel_child${preview.length - 1}`).offsetLeft * -1
-      const carousel = CarouselDiv.current as HTMLDivElement
+      const carousel = CarouselDiv.current
 
       let pos2 = pos1
       if (e.type === 'mousemove') {
@@ -79,7 +80,7 @@ const Carousel = ({ preview, isMobile, onChildClick }) => {
   }
 
   useEffect(() => {
-    if (!preview || preview.length === 1) return 0
+    if (!preview || preview.length === 1) return () => {}
     
     shiftSlide()
 

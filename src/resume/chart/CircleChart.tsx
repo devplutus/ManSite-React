@@ -3,8 +3,8 @@ import { useEffect, useState, useRef } from 'react'
 import './CircleChart.scss'
 
 const CircleChart = ({ name, value, isMobile }) => {
-  const chart = useRef()
-  const chartPercentage = useRef()
+  const chart = useRef<HTMLDivElement>()
+  const chartPercentage = useRef<HTMLSpanElement>()
   const [animate, setAnimate] = useState(false)
 
   useEffect(() => {
@@ -13,12 +13,12 @@ const CircleChart = ({ name, value, isMobile }) => {
 
     const startAnimate = () => {
       const animateInterval = setInterval(() => {
-        let percentage = parseInt(chartPercentage.current.innerText || 0, 10)
+        let percentage = parseInt(chartPercentage.current.innerText || '0', 10)
         if (percentage < value) {
           percentage += Math.floor(value / 2) > percentage ? 3 : 2
           percentage = percentage > value ? value : percentage
           chart.current.style.setProperty('--circle-chart-width', `${percentage}%`)
-          chartPercentage.current.innerText = percentage
+          chartPercentage.current.innerText = percentage.toString()
         } else {
           clearInterval(animateInterval)
         }

@@ -27,10 +27,10 @@ const Menu = ({ isMobile }) => {
   const [page, setPage] = useState(0)
   const [isMove, setIsMove] = useState(false)
 
-  const menuContainer = useRef()
-  const menu = useRef()
-  const menuSelected = useRef()
-  const menuSelectedItems = useRef()
+  const menuContainer = useRef<HTMLDivElement>()
+  const menu = useRef<HTMLDivElement>()
+  const menuSelected = useRef<HTMLDivElement>()
+  const menuSelectedItems = useRef<HTMLDivElement>()
 
   const moveMenu = (index: number, onlyMenu=false) => {
     // Move Selected Menu

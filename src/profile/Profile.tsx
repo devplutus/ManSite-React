@@ -72,7 +72,9 @@ const Profile = () => {
     setIndex(index + 1 === jobList.length ? 0 : index + 1)
   }
 
-  useEffect(() => typeJob(index))
+  useEffect(() => {
+    typeJob(index)
+  })
 
   return (
     <div id="profile">
