@@ -11,6 +11,8 @@ const BarChart = ({ name, value, isMobile }) => {
     const resume = document.getElementById('resume')
 
     const interval = setInterval(() => {
+      if (!chart.current) return
+
       const scroll = isMobile ? mainContent.clientHeight : resume.clientHeight
       const { top: chartTop } = chart.current.getBoundingClientRect()
       const { top: resumeTop } = resume.getBoundingClientRect()
@@ -18,8 +20,10 @@ const BarChart = ({ name, value, isMobile }) => {
       
       if (!animate && scroll > top) {
         setTimeout(() => {
-          chart.current.style.setProperty('--bar-chart-width', `${value}%`)
-          chart.current.classList.add('fill')
+          if (chart.current) {
+            chart.current.style.setProperty('--bar-chart-width', `${value}%`)
+            chart.current.classList.add('fill')
+          }
         }, 200)
         setAnimate(true)
         clearInterval(interval)

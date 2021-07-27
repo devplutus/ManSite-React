@@ -18,8 +18,10 @@ const Knowledge = ({ title, subTitle, isMobile }) => {
       
       if (!animate && scroll > top) {
         setTimeout(() => {
-          const icon = knowledge.current.getElementsByClassName('icon')[0]
-          icon.classList.add('active')
+          if (knowledge.current) {
+            const icon = knowledge.current.getElementsByClassName('icon')[0]
+            icon.classList.add('active')
+          }
         }, 200)
         setAnimate(true)
         clearInterval(interval)

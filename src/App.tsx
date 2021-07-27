@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useRef, useContext } from 'react'
 import './App.scss'
+
+import { MainContext } from './providers/mainProvider'
 
 import MoveBackground from './common/MoveBackground'
 import Profile from './profile/Profile'
@@ -12,19 +14,7 @@ import Contact from './contact/Contact'
 const App = () => {
   const ContentDiv = useRef()
 
-  const [isMobile, setIsMobile] = useState(document.body.clientWidth < 1024)
-
-  const checkMobile = () => {
-    const mobile = document.body.clientWidth < 1024
-    if (isMobile !== mobile) {
-      setIsMobile(mobile)
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  })
+  const { isMobile } = useContext(MainContext)
 
   return (
     <>
@@ -33,7 +23,7 @@ const App = () => {
         {/* Drag 이슈 때문에 모바일&PC 나눔 */}
         {!isMobile ? (
           <div id="main_content">
-            <Menu isMobile={isMobile} />
+            <Menu />
             <Profile />
             <div ref={ContentDiv} id="main_content_slide">
               <Resume className="content" isMobile={isMobile} />
@@ -43,7 +33,7 @@ const App = () => {
           </div>
         ) : (
           <>
-          <Menu isMobile={isMobile} />
+          <Menu />
           <div ref={ContentDiv} id="m_main_content">
             <Profile />
             <Resume className="content" isMobile={isMobile} />

@@ -50,6 +50,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 const Profile = () => {
 
   const [index, setIndex] = useState(0)
+  const [stop, setStop] = useState(false)
 
   const typeJob = async (index: number) => {
     const jobTitle = document.getElementById('profile_job_title')
@@ -69,11 +70,16 @@ const Profile = () => {
 
     jobSkills.classList.add('hide')
     await delay(1000)
-    setIndex(index + 1 === jobList.length ? 0 : index + 1)
+    if (!stop) {
+      setIndex(index + 1 === jobList.length ? 0 : index + 1)
+    }
   }
 
   useEffect(() => {
     typeJob(index)
+    return () => {
+      setStop(true)
+    }
   })
 
   return (

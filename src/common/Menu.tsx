@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useContext } from 'react'
+import { MainContext } from '../providers/mainProvider'
 import './Menu.scss'
 
 const menuItems = [
@@ -23,7 +24,8 @@ const menuItems = [
 
 const menuId = menuItems.map(m => m.title.toLowerCase())
 
-const Menu = ({ isMobile }) => {
+const Menu = () => {
+  
   const [page, setPage] = useState(0)
   const [isMove, setIsMove] = useState(false)
 
@@ -31,6 +33,8 @@ const Menu = ({ isMobile }) => {
   const menu = useRef<HTMLDivElement>()
   const menuSelected = useRef<HTMLDivElement>()
   const menuSelectedItems = useRef<HTMLDivElement>()
+
+  const { isMobile } = useContext(MainContext)
 
   const moveMenu = (index: number, onlyMenu=false) => {
     // Move Selected Menu
@@ -122,14 +126,14 @@ const Menu = ({ isMobile }) => {
       window.addEventListener('resize', resize)
       mainContent.addEventListener('scroll', checkContentByScroll)
       return () => {
-        menuSelected.current.setAttribute('style', '')
-        menuSelectedItems.current.setAttribute('style', '')
+        if (menuSelected.current) menuSelected.current.setAttribute('style', '')
+        if (menuSelectedItems.current) menuSelectedItems.current.setAttribute('style', '')
         window.removeEventListener('resize', resize)
         mainContent.removeEventListener('scroll', checkContentByScroll)
       }  
     }
     return null
-  })
+  }, [menu, menuSelected, menuSelectedItems])
 
   return (
     <div ref={menuContainer} id="menu_container">

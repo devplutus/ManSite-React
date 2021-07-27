@@ -13,6 +13,8 @@ const CircleChart = ({ name, value, isMobile }) => {
 
     const startAnimate = () => {
       const animateInterval = setInterval(() => {
+        if (!chartPercentage.current) return
+
         let percentage = parseInt(chartPercentage.current.innerText || '0', 10)
         if (percentage < value) {
           percentage += Math.floor(value / 2) > percentage ? 3 : 2
@@ -26,6 +28,8 @@ const CircleChart = ({ name, value, isMobile }) => {
     }
     
     const interval = setInterval(() => {
+      if (!chart.current) return
+
       const scroll = isMobile ? mainContent.clientHeight : resume.clientHeight
       const { top: chartTop } = chart.current.getBoundingClientRect()
       const { top: resumeTop } = resume.getBoundingClientRect()
@@ -39,8 +43,9 @@ const CircleChart = ({ name, value, isMobile }) => {
         clearInterval(interval)
       }
     }, 10)
+    
     return () => clearInterval(interval)
-  })
+  }, [chart, chartPercentage])
 
   return (
     <div className="circle_chart_container">

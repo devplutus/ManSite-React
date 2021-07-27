@@ -8,8 +8,11 @@ const DotChart = ({ name, value, isMobile }) => {
   const [animate, setAnimate] = useState(false)
 
   const startAnimation = async () => {
+    if (!chart.current) return
+    
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
     const dots = chart.current.getElementsByClassName('dot')
+
     for (let i = 0; i < Math.floor(value/10); i++) {
       dots[i].classList.add('fill')
       await delay(100)
@@ -28,6 +31,8 @@ const DotChart = ({ name, value, isMobile }) => {
     const resume = document.getElementById('resume')
 
     const interval = setInterval(() => {
+      if (!chart.current) return
+
       const scroll = isMobile ? mainContent.clientHeight : resume.clientHeight
       const { top: chartTop } = chart.current.getBoundingClientRect()
       const { top: resumeTop } = resume.getBoundingClientRect()
