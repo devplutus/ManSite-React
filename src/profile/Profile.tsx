@@ -64,6 +64,7 @@ const Profile = () => {
 
     for (let reverse = 0; reverse < 2; reverse++) {
       for (let i = 0; i <= job.length; i++) {
+        if (stop) return
         const slice = !reverse ? i : job.length - i
         jobTitle.innerHTML = `${job.slice(0, slice)}` || '&nbsp;'
         await delay(100)
@@ -85,7 +86,7 @@ const Profile = () => {
     return () => {
       setStop(true)
     }
-  })
+  }, [index])
 
   return (
     <div id="profile">
