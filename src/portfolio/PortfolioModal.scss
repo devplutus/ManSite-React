@@ -158,8 +158,11 @@
     font-size: 10px;
   }
   .portfolio_modal {
-    width: 90%;
-    height: 90%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
   }
   .portfolio_modal_carousel {
     height: 45%;

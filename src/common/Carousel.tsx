@@ -115,7 +115,7 @@ const Carousel = ({ preview, isMobile, onChildClick }) => {
             key={i}
             id={`carousel_child${i}`}
             className="carousel_child"
-            onClick={() => onChildClick(`/images/portfolio/preview/${p}`)}
+            // onClick={() => onChildClick(`/images/portfolio/preview/${p}`)}
             style={{ background: `url('/images/portfolio/preview/${p}')` }}
           />
         ))}
