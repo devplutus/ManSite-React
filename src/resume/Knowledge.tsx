@@ -1,10 +1,14 @@
 import * as React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useContext } from 'react'
+import { MainContext } from '../providers/mainProvider'
 import './Knowledge.scss'
 
 const Knowledge = ({ title, subTitle, isMobile }) => {
   const knowledge = useRef<HTMLDivElement>()
+
   const [animate, setAnimate] = useState(false)
+
+  const { language } = useContext(MainContext)
 
   useEffect(() => {
     const mainContent = document.getElementById('m_main_content')
@@ -38,8 +42,8 @@ const Knowledge = ({ title, subTitle, isMobile }) => {
         <i className="far fa-check-circle icon" />
       </div>
       <div className="knowledge_content">
-        <span className="knowledge_title">{title}</span>
-        {subTitle && <span className="knowledge_sub_title">{subTitle}</span>}
+        <span className="knowledge_title">{title[language]}</span>
+        {subTitle[language] && <span className="knowledge_sub_title">{subTitle[language]}</span>}
       </div>
     </div>
   )

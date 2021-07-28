@@ -27,11 +27,11 @@ const contactInfo = [
 ]
 
 const Contact = ({ className }) => {
-  const { isMobile } = useContext(MainContext)
+  const { isMobile, language } = useContext(MainContext)
 
   return (
     <div id="contact" className={className}>
-      <ContentTitle title="CONTACT" />
+      <ContentTitle title={language === 'ko' ? '연락처' : 'CONTACT'} />
       <div className="contact_container">
         <div className="contact_content">
           {contactInfo.map((contact, i) => (

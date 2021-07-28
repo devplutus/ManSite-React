@@ -6,23 +6,35 @@ import './Menu.scss'
 const menuItems = [
   {
     icon: 'fa-address-card',
-    title: 'Profile',
+    title: {
+      ko: '프로필',
+      en: 'Profile'
+    },
   },
   {
     icon: 'fa-file-invoice',
-    title: 'Resume',
+    title: {
+      ko: '이력서',
+      en: 'Resume',
+    }
   },
   {
     icon: 'fa-pencil-ruler',
-    title: 'Portfolio',
+    title: {
+      ko: '포트폴리오',
+      en: 'Portfolio',
+    }
   },
   {
     icon: 'fa-mobile-alt',
-    title: 'Contact',
+    title: {
+      ko: '연락처',
+      en: 'Contact',
+    }
   },
 ]
 
-const menuId = menuItems.map(m => m.title.toLowerCase())
+const menuId = menuItems.map(m => m.title.en.toLowerCase())
 
 const Menu = () => {
   
@@ -34,7 +46,7 @@ const Menu = () => {
   const menuSelected = useRef<HTMLDivElement>()
   const menuSelectedItems = useRef<HTMLDivElement>()
 
-  const { isMobile } = useContext(MainContext)
+  const { isMobile, language } = useContext(MainContext)
 
   const moveMenu = (index: number, onlyMenu=false) => {
     // Move Selected Menu
@@ -149,7 +161,7 @@ const Menu = () => {
               }}
             >
               <i className={`fas ${item.icon}`} />
-              <span>{item.title.toUpperCase()}</span>
+              <span>{item.title[language].toUpperCase()}</span>
             </div>
           )
         })}
@@ -160,7 +172,7 @@ const Menu = () => {
             return (
               <div className="item" key={`menuItem${item.icon}`}>
                 <i className={`fas ${item.icon}`} />
-                <span>{item.title.toUpperCase()}</span>
+                <span>{item.title[language].toUpperCase()}</span>
               </div>
             )
           })}

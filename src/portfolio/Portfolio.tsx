@@ -12,7 +12,7 @@ import { MainContext } from '../providers/mainProvider'
 
 const Portfolio = ({ className }) => {
 
-  const { isMobile } = useContext(MainContext)
+  const { isMobile, language } = useContext(MainContext)
 
   const [modal, setModal] = useState(false)
   const [detail, setDetail] = useState({
@@ -37,7 +37,7 @@ const Portfolio = ({ className }) => {
       {
         (modal) && <PortfolioModal {...detail} closeEvent={() => setModal(false)} isMobile={isMobile} />
       }
-      <ContentTitle title="PORTFOLIO" />
+      <ContentTitle title={language === 'ko' ? '포트폴리오' : 'PORTFOLIO'} />
       <div className="portfolio_container">
         {isMobile ? (
           <div className="portfolio_content">
