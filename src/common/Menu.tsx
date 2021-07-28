@@ -126,14 +126,14 @@ const Menu = () => {
       window.addEventListener('resize', resize)
       mainContent.addEventListener('scroll', checkContentByScroll)
       return () => {
-        if (menuSelected.current) menuSelected.current.setAttribute('style', '')
-        if (menuSelectedItems.current) menuSelectedItems.current.setAttribute('style', '')
+        menuSelected.current.setAttribute('style', '')
+        menuSelectedItems.current.setAttribute('style', '')
         window.removeEventListener('resize', resize)
         mainContent.removeEventListener('scroll', checkContentByScroll)
       }  
     }
     return null
-  }, [menu, menuSelected, menuSelectedItems])
+  })
 
   return (
     <div ref={menuContainer} id="menu_container">
