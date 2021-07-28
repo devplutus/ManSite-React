@@ -3,19 +3,19 @@ import * as React from 'react'
 import { createContext, useState, useEffect } from 'react'
 
 export const MainContext = createContext({
-  langauge: 'ko',
+  language: 'ko',
   isMobile: false,
   setIsMobileHandler: (isMobile: boolean): void => {},
-  setLangaugeHandler: (language: string): void => {}
+  setLanguageHandler: (language: string): void => {}
 })
 
 const MainContextProvider = ({ children }) => {
 
-  const [langauge, setLangauge] = useState(localStorage.getItem('language') || 'ko')
+  const [language, setlanguage] = useState(localStorage.getItem('language') || 'ko')
   const [isMobile, setIsMobile] = useState(document.body.clientWidth < 1024)
 
-  const setLangaugeHandler = (langauge: string) => {
-    setLangauge(langauge)
+  const setLanguageHandler = (language: string) => {
+    setlanguage(language)
   }
   const setIsMobileHandler = (isMobile: boolean) => {
     setIsMobile(isMobile)
@@ -35,10 +35,10 @@ const MainContextProvider = ({ children }) => {
 
   return (
     <MainContext.Provider value={{
-      langauge,
+      language,
       isMobile,
       setIsMobileHandler,
-      setLangaugeHandler
+      setLanguageHandler
     }}>
       {children}
     </MainContext.Provider>
