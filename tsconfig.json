@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
     "jsx": "react"
-  }
+  },
+  "include": [
+    "custom.d.ts",
+    "src"
+  ]
 }

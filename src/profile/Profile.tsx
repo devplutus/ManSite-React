@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import LanguageToggle from '../common/LanguageToggle'
+import { MainContext } from '../providers/mainProvider'
 import './Profile.scss'
 
 const jobList = [
@@ -52,6 +54,8 @@ const Profile = () => {
   const [index, setIndex] = useState(0)
   const [stop, setStop] = useState(false)
 
+  const { isMobile } = useContext(MainContext)
+
   const typeJob = async (index: number) => {
     const jobTitle = document.getElementById('profile_job_title')
     const jobSkills = document.getElementById('profile_skills')
@@ -85,6 +89,9 @@ const Profile = () => {
 
   return (
     <div id="profile">
+      {
+        !isMobile && <LanguageToggle />
+      }
       <div id="profile_image" />
       <div id="profile_name">
         <span>JUNG BYEONG MAN</span>

@@ -10,6 +10,7 @@ import Menu from './common/Menu'
 import Resume from './resume/Resume'
 import Portfolio from './portfolio/Portfolio'
 import Contact from './contact/Contact'
+import LanguageToggle from './common/LanguageToggle'
 
 const App = () => {
   const ContentDiv = useRef()
@@ -34,6 +35,7 @@ const App = () => {
         ) : (
           <>
           <Menu />
+          <LanguageToggle />
           <div ref={ContentDiv} id="m_main_content">
             <Profile />
             <Resume className="content" />

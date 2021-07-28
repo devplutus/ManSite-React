@@ -1,0 +1,48 @@
+@import '../assets/scss/variables';
+@import '../assets/scss/mixins';
+
+.language_toggle {
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 5px;
+  z-index: 10;
+}
+
+.language_toggle_icon {
+  width: 100%;
+  height: 100%;
+}
+
+.language_toggle_item {
+  height: 15px;
+  width: 15px;
+  margin: 0 5px;
+  transition: all 1s;
+
+  &.active {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+@include mobile {
+  .language_toggle {
+    top: $menu-height;
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+@include tablet {
+  .language_toggle {
+    top: $menu-height;
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
