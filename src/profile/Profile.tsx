@@ -25,7 +25,7 @@ const jobList = [
   },
   {
     title: {
-      'ko': '프론트 엔드',
+      'ko': '프론트엔드',
       'en': 'Front-End'
     },
     icons: [
@@ -43,7 +43,7 @@ const jobList = [
   },
   {
     title: {
-      'ko': '백 엔드',
+      'ko': '백엔드',
       'en': 'Back-End'
     },
     icons: [
