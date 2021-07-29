@@ -13,8 +13,9 @@ const MainContextProvider = ({ children }) => {
 
   const [language, setlanguage] = useState(localStorage.getItem('language') || 'ko')
   const [isMobile, setIsMobile] = useState(document.body.clientWidth < 1024)
-
+  
   const setLanguageHandler = (language: string) => {
+    localStorage.setItem('language', language)
     setlanguage(language)
   }
   const setIsMobileHandler = (isMobile: boolean) => {
