@@ -140,7 +140,7 @@ const Profile = () => {
       <div id="profile_image" />
       <div id="profile_name">
         <span>
-          { language === 'ko' ? '정 병 만' : 'BYEONG MAN JUNG'}
+          { language === 'ko' ? '정 병 만' : 'BYEONG-MAN JUNG'}
         </span>
       </div>
       <div id="profile_birth">

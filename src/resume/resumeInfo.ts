@@ -38,8 +38,7 @@ export const experience: Resume[] = [
     desc: {
       ko: ` <b>Javascript</b>를 주 언어로 개발. 
       <b>Nuxt.js</b> 와 <b>Express.js</b> 프레임워크를 사용하여 Dynamics CRM 외부 서비스 개발.`,
-      en: ` <b>Javascript</b> was used as the primary language. 
-      Developing Dynamics CRM services and websites using the <b>Nuxt.js</b> and <b>Express.js</b> framework.`,
+      en: ` Developing Dynamics CRM services and websites using the <b>Nuxt.js</b> and <b>Express.js</b> framework.`,
     }
   },
   {
@@ -56,11 +55,13 @@ export const experience: Resume[] = [
     },
     desc: {
       ko: `<b>.Net Winforms</b> and <b>WPF</b> 프레임워크를 사용하여 태양광 패널 성능 측정을 위한 윈도우 데스크탑 어플리케이션 개발. `,
-      en: ` Develop desktop applications for solar collector panel measurements based on 
-      <b>C#</b> using the <b>.Net Winforms</b> and <b>WPF</b> framework.`,
+      en: ` Developing desktop applications for performance measurement of solar panels using the <b>.Net Winforms</b> and <b>WPF</b> framework.`,
     }
   },
 ]
+
+
+// 주언어 빼기
 
 export const educations: Resume[] = [
   {
@@ -77,7 +78,7 @@ export const educations: Resume[] = [
     },
     desc: {
       ko: `<b>소프트웨어 공학과</b> 재학 중.`,
-      en: `Bachelor's degree in <b>computer science</b>.`,
+      en: `Bachelor's degree in <b>Software Engineering</b>.`,
     },
   },
   {
@@ -90,11 +91,11 @@ export const educations: Resume[] = [
     },
     agency: {
       ko: '경기도',
-      en: 'Gyeonggi',
+      en: 'Gyeonggi Province',
     },
     desc: {
       ko: `<b>컴퓨터정보통신학과</b> 전문학사 취득.`,
-      en: `Associate's degree in <b>computer science</b>.`,
+      en: `Associate's degree in <b>Computer IT Communications</b>.`,
     }
   },
   {
@@ -111,7 +112,7 @@ export const educations: Resume[] = [
     },
     desc: {
       ko: `<b>컴퓨터공학과</b> 1학년 재학 후 중퇴.`,
-      en: `Bachelor's degree in <b>computer science</b>. But dropped out of college.`,
+      en: `Pursued Bachelor’s degree in <b>Computer Science</b> for 2 years until dropping out and moving onto private education  subsidized by the government, specialising in Java.`,
     }
   },
 ]

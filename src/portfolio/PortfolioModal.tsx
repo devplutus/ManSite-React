@@ -1,16 +1,19 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import * as React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useContext } from 'react'
 import './PortfolioModal.scss'
-import { Skill, Langauge } from './portfolioInfo'
+import { Skill, DevLangauge } from './portfolioInfo'
 import Carousel from '../common/Carousel'
+import { MainContext } from '../providers/mainProvider'
 
 const PortfolioModal = ({ closeEvent, preview, skills, languages, features, isMobile }) => {
   const modalContent = useRef()
 
   const [zoomVisible, setZoomVisible] = useState(false)
   const [zoomURL, setZoomURL] = useState('')
+
+  const { language } = useContext(MainContext)
 
   useEffect(() => {
     setTimeout(() => {
@@ -61,12 +64,12 @@ const PortfolioModal = ({ closeEvent, preview, skills, languages, features, isMo
             <div className="container">
               <div className="title">Languages</div>
               <div className="body">
-                {languages.map((language: Langauge) => (
-                  <div className="badge" key={language.name} style={{
-                    background: language.background,
-                    color: language.color
+                {languages.map((devLanguage: DevLangauge) => (
+                  <div className="badge" key={devLanguage.name} style={{
+                    background: devLanguage.background,
+                    color: devLanguage.color
                   }}>
-                    {language.name}
+                    {devLanguage.name}
                   </div>
                 ))}
               </div>
@@ -74,7 +77,7 @@ const PortfolioModal = ({ closeEvent, preview, skills, languages, features, isMo
             <div className="container">
               <div className="title">Features</div>
               <div className="body column">
-                {features.map((feature, i) => (
+                {features[language].map((feature, i) => (
                   <div className="feature" key={new Date().getTime() + i}>
                     <i className='fas fa-check' />
                     <span>{feature}</span>

@@ -152,7 +152,7 @@ const NoImage = () => {
     <div className="carousel">
       <div className="no_image">
         <i className="fas fa-eye-slash" />
-        <span>Can&#39;t attach image as corporate request</span>
+        <span>Can&#39;t attach image due to confidentiality</span>
       </div>
     </div>
   )

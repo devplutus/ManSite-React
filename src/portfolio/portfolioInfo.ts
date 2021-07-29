@@ -1,6 +1,6 @@
 interface Portfolio {
-  title: string
-  agency: string
+  title: Langauge
+  agency: Langauge
   logoFileName: string
   detail: PortfolioDetail
 }
@@ -8,8 +8,8 @@ interface Portfolio {
 interface PortfolioDetail {
   preview?: string[]
   skills: Skill[]
-  languages: Langauge[]
-  features: string[]
+  languages: DevLangauge[]
+  features: LangaugeList
 }
 
 export interface Skill {
@@ -18,10 +18,20 @@ export interface Skill {
   color?: string
 }
 
-export interface Langauge {
+export interface DevLangauge {
   name: string
   background?: string
   color?: string
+}
+
+export interface Langauge {
+  ko: string
+  en: string
+}
+
+export interface LangaugeList {
+  ko: string[]
+  en: string[]
 }
 
 const skills: {[key: string]: Skill} = {
@@ -98,7 +108,7 @@ const skills: {[key: string]: Skill} = {
   }
 }
 
-const languages: {[name:string]: Langauge} = {
+const languages: {[name:string]: DevLangauge} = {
   javascript: {
     name: 'Javascript',
     background: '#f0da50',
@@ -130,8 +140,14 @@ const languages: {[name:string]: Langauge} = {
 
 export const portfolioInfo: Portfolio[] = [
   {
-    title: 'Integrate SAP with MS CRM',
-    agency: 'Cariflex',
+    title: {
+      ko: 'SAP&MS CRM 마이그레이션',
+      en: 'Integrate SAP with MS CRM',
+    },
+    agency: {
+      ko: '(주)대림코퍼레이션',
+      en: 'Cariflex'
+    },
     logoFileName: `cariflex.png`,
     detail: {
       preview: [
@@ -148,16 +164,25 @@ export const portfolioInfo: Portfolio[] = [
         languages.javascript,
         languages.node
       ],
-      features: [
-        'SAP CRM 데이터 통합',
-        'RFC Interface로 실시간 화면 구현',
-        'MS Dynamics CRM에 실시간 페이지 임베드',
-      ]
+      features: {
+        ko: [
+          'SAP CRM 데이터 통합',
+          'RFC Interface로 실시간 화면 구현',
+          'MS Dynamics CRM에 실시간 페이지 임베드',
+        ],
+        en: [],
+      }
     }
   },
   {
-    title: 'Prescription Scan',
-    agency: 'MrBot',
+    title: {
+      ko: '처방전 스캔 프로그램',
+      en: 'Prescription Scan'
+    },
+    agency: {
+      ko: 'MrBot',
+      en: 'MrBot'
+    },
     logoFileName: 'mrbot.png',
     detail: {
       preview: [
@@ -178,21 +203,28 @@ export const portfolioInfo: Portfolio[] = [
         languages.node,
         languages.python
       ],
-      features: [
-        '업로드된 처방전 이미지를 Text로 변환하여 CRM에 바인딩',
-        'OCR API 연동(Google, Kakao, Naver)',
-        'Tesseract 결과 확인을 위한 Node 서버 구현',
-        '디테일한 Tesseract 작업을 위한 Python Script',
-        'MS Dynamics CRM, Azure Blob Storage 연동',
-        '이미지 Crop 기능',
-        'OCR Data Drag&Drop 기능',
-        'Excel 내보내기 기능',
-      ]
+      features: {
+        ko: [
+          '업로드된 처방전 이미지를 Text로 변환하여 CRM에 바인딩',
+          'OCR API 연동(Google, Kakao, Naver)',
+          'Tesseract 결과 확인을 위한 Node 서버 구현',
+          '디테일한 Tesseract 작업을 위한 Python Script',
+          'MS Dynamics CRM, Azure Blob Storage 연동',
+          'OCR Data Drag&Drop 기능',
+        ],
+        en: [],
+      }
     }
   },
   {
-    title: 'SMS Service',
-    agency: 'Qualisoft',
+    title: {
+      ko: 'SMS 전송 서비스',
+      en: 'SMS Service'
+    },
+    agency: {
+      ko: '(주)퀄리소프트',
+      en: 'Qualisoft'
+    },
     logoFileName: 'qualisoft.png',
     detail: {
       preview: [
@@ -206,15 +238,24 @@ export const portfolioInfo: Portfolio[] = [
         languages.javascript,
         languages.node
       ],
-      features: [
-        'Popbill API를 이용한 SMS 서비스',
-        'SMS Service 인증 로직 구현'
-      ]
+      features: {
+        ko: [
+          'Popbill API를 이용한 SMS 서비스',
+          'SMS Service 인증 로직 구현'
+        ],
+        en: [],
+      }
     }
   },
   {
-    title: 'Scholarship Management',
-    agency: 'Future foundation of Korea',
+    title: {
+      ko: '장학금 관리 시스템',
+      en: 'Scholarship Management',
+    },
+    agency: {
+      ko: '미래나눔재단',
+      en: 'Future foundation of Korea',
+    },
     logoFileName: 'mirae.png',
     detail: {
       preview: [
@@ -229,16 +270,25 @@ export const portfolioInfo: Portfolio[] = [
         languages.csharp,
         languages.javascript
       ],
-      features: [
-        'MS Dynamics CRM 연동',
-        'Azure Blob Storage 연동',
-        'PASS 인증 기능',
-      ]
+      features: {
+        ko: [
+          'MS Dynamics CRM 연동',
+          'Azure Blob Storage 연동',
+          'PASS 인증 기능',
+        ],
+        en: [],
+      }
     }
   },
   {
-    title: 'Fleet Management System',
-    agency: 'PwC',
+    title: {
+      ko: '차량 관리 시스템',
+      en: 'Fleet Management System',
+    },
+    agency: {
+      ko: '삼일회계법인',
+      en: 'PwC',
+    },
     logoFileName: 'pwc.png',
     detail: {
       preview: [
@@ -253,20 +303,29 @@ export const portfolioInfo: Portfolio[] = [
         languages.csharp,
         languages.javascript
       ],
-      features: [
-        'PwC 내부 데이터 연동',
-        '차량 생성 및 수정 폼 개발',
-        'Excel 가져오기 및 Validate 기능',
-        'Excel 내보내기 기능',
-        '각 항목별 Excel Form 다운로드 기능',
-        '사용자 권한 부여 기능',
-        'Window ADFS 인증 기능',
-      ]
+      features: {
+        ko: [
+          'PwC 내부 데이터 연동',
+          '차량 생성 및 수정 폼 개발',
+          'Excel 가져오기 및 Validate 기능',
+          'Excel 내보내기 기능',
+          '각 항목별 Excel Form 다운로드 기능',
+          '사용자 권한 부여 기능',
+          'Window ADFS 인증 기능',
+        ],
+        en: [],
+      }
     }
   },
   {
-    title: 'Remote Control System',
-    agency: 'Hanwha Q Cells',
+    title: {
+      ko: '원격 컨트롤 시스템',
+      en: 'Remote Control System',
+    },
+    agency: {
+      ko: '한화큐셀',
+      en: 'Hanwha Q Cells',
+    },
     logoFileName: 'qcell.png',
     detail: {
       skills: [
@@ -278,17 +337,26 @@ export const portfolioInfo: Portfolio[] = [
       languages: [
         languages.csharp
       ],
-      features: [
-        'Socket 통신 구현',
-        'Master&Slave 관계로 원격 컨트롤 기능',
-        '각 Slave 기계들의 상황을 모니터 할 수 있는 Master 화면 구현',
-        '각 Slave 기계들의 시작&종료 시간 설정 및 바로 시작&정지 기능',
-      ]
+      features: {
+        ko: [],
+        en: [
+          'Socket 통신 구현',
+          'Master&Slave 관계로 원격 컨트롤 기능',
+          '각 Slave 기계들의 상황을 모니터 할 수 있는 Master 화면 구현',
+          '각 Slave 기계들의 시작&종료 시간 설정 및 바로 시작&정지 기능',
+        ]
+      }
     }
   },
   {
-    title: 'PV Monitoring',
-    agency: 'LG Hausys',
+    title: {
+      ko: '태양광 측정 모니터링 시스템',
+      en: 'PV Monitoring System',
+    },
+    agency: {
+      ko: 'LG 하우시스',
+      en: 'LG Hausys',
+    },
     logoFileName: 'hausys.png',
     detail: {
       preview: [
@@ -305,17 +373,26 @@ export const portfolioInfo: Portfolio[] = [
         languages.csharp,
         languages.cdplus
       ],
-      features: [
-        'SerialPort를 사용하여 8개의 태양광 패널 측정 모듈 연동',
-        '태양광 패널 측정을 위한 Arduino 프로그래밍',
-        '각 모듈의 측정 데이터를 디테일하게 볼 수 있는 화면 구현',
-        '측정 주기를 설정하여 각 주기마다 DB에 데이터 저장',
-      ]
+      features: {
+        ko: [],
+        en: [
+          'SerialPort를 사용하여 8개의 태양광 패널 측정 모듈 연동',
+          '태양광 패널 측정을 위한 Arduino 프로그래밍',
+          '각 모듈의 측정 데이터를 디테일하게 볼 수 있는 화면 구현',
+          '측정 주기를 설정하여 각 주기마다 DB에 데이터 저장',
+        ]
+      }
     }
   },
   {
-    title: 'E-commerce Site',
-    agency: 'Laberry',
+    title: {
+      ko: '라베리 쇼핑몰 사이트 구축',
+      en: 'E-commerce Site',
+    },
+    agency: {
+      ko: '라베리',
+      en: 'Laberry',
+    },
     logoFileName: 'laberry.png',
     detail: {
       preview: [
@@ -330,13 +407,16 @@ export const portfolioInfo: Portfolio[] = [
         languages.php,
         languages.javascript
       ],
-      features: [
-        '디자인된 이미지 퍼블리싱',
-        '결제 모듈 연동',
-        '룰렛 이벤트 개발',
-        '출석체크 이벤트 개발',
-        '유저 등급 기능',
-      ]
+      features: {
+        ko: [],
+        en: [
+          '디자인된 이미지 퍼블리싱',
+          '결제 모듈 연동',
+          '룰렛 이벤트 개발',
+          '출석체크 이벤트 개발',
+          '유저 등급 기능',
+        ]
+      }
     }
   },
 ]
