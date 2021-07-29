@@ -57,6 +57,11 @@ const jobList = [
   }
 ]
 
+interface Position {
+  x: number
+  y: number
+}
+
 const Profile = () => {
   
   const { isMobile, language } = useContext(MainContext)
@@ -67,6 +72,11 @@ const Profile = () => {
   const [reverse, setReverse] = useState(false)
   const [jobTitle, setJobTitle] = useState('')
   const [isEnd, setIsEnd] = useState(false)
+  const [isHover, setIsHover] = useState(false)
+  const [hoverPos, setHoverPos] = useState<Position>({
+    x: 0,
+    y: 0
+  })
 
   const showSkills = () => {
     profileSkills.current.classList.add('show')
@@ -74,6 +84,25 @@ const Profile = () => {
 
   const hideSkills = () => {
     profileSkills.current.classList.remove('show')
+  }
+
+  const mouseMoveForHover = (e: MouseEvent) => {
+    setHoverPos({
+      x: e.clientX + 10,
+      y: e.clientY + 10
+    })
+  }
+
+  const touchMoveForHover = (e: TouchEvent) => {
+    setHoverPos({
+      x: e.touches[0].clientX + 30,
+      y: e.touches[0].clientY + 30
+    })
+  }
+
+  const touchStartForHover = (e: TouchEvent) => {
+    touchMoveForHover(e)
+    setIsHover(true)
   }
 
   useEffect(() => {
@@ -132,13 +161,38 @@ const Profile = () => {
     return () => clearTimeout(timeout)
   }, [jobTitle])
 
+  useEffect(() => {
+    if (isHover) {
+      if (isMobile) {
+        document.addEventListener('touchmove', touchMoveForHover)
+        return () => document.removeEventListener('touchmove', touchMoveForHover)
+      }
+      document.addEventListener('mousemove', mouseMoveForHover)
+      return () => document.removeEventListener('mousemove', mouseMoveForHover)
+    }
+    return () => {}
+  }, [isHover])
+
   return (
     <div id="profile">
       {
         !isMobile && <LanguageToggle />
       }
       <div id="profile_image" />
-      <div id="profile_name">
+      <div 
+        id="profile_name" 
+        onMouseEnter={() => setIsHover(true)} 
+        onTouchStart={(e) => touchStartForHover(e as any)}
+        onMouseLeave={() => setIsHover(false)}
+        onTouchEnd={() => setIsHover(false)}>
+        <span 
+          id="profile_name_callme"
+          className={isHover ? 'show' : ''}
+          style={{
+            transform: `translate(${hoverPos.x}px, ${hoverPos.y}px)`
+          }}>
+          You can call me Mann!
+        </span>
         <span>
           { language === 'ko' ? '정 병 만' : 'BYEONG-MAN JUNG'}
         </span>
