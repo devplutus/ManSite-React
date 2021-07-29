@@ -111,7 +111,7 @@ export const educations: Resume[] = [
       en: 'Busan',
     },
     desc: {
-      ko: `<b>컴퓨터공학과</b> 1학년 재학 후 중퇴.`,
+      ko: `<b>컴퓨터공학과</b> 1학년 재학 후 중퇴 후 전자정부 표준프레임워크(Spring) 교육 수료.`,
       en: `Pursued Bachelor’s degree in <b>Computer Science</b> for 2 years until dropping out and moving onto private education  subsidized by the government, specialising in Java.`,
     }
   },
