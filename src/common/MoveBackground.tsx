@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 import './MoveBackground.scss';
 
 const IS_MOBILE = window.screen.width < 780
@@ -30,13 +31,13 @@ const MoveBackground = () => {
     })
   }
 
-  return (
+  return useMemo(() => (
     <div id="movebackground">
       {
         Array(MAX_COUNT).fill(0).map((_, idx) => createRectInfo(idx))
       }
     </div>
-  )
+  ), [])
 };
 
 export default MoveBackground;
