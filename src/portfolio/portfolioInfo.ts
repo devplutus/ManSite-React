@@ -166,11 +166,15 @@ export const portfolioInfo: Portfolio[] = [
       ],
       features: {
         ko: [
-          'SAP CRM 데이터 통합',
-          'RFC Interface로 실시간 화면 구현',
+          'SAP와 MS Dynamics CRM 데이터 통합',
+          'RFC Interface로 실시간 조회 사이트 개발',
           'MS Dynamics CRM에 실시간 페이지 임베드',
         ],
-        en: [],
+        en: [
+          'SAP - MS Dynamics CRM Data Integration',
+          'Real-time website development with RFC Interface',
+          'Imbedding Real-time website on MS Dynamics CRM',
+        ],
       }
     }
   },
@@ -232,7 +236,8 @@ export const portfolioInfo: Portfolio[] = [
       ],
       skills: [
         skills.vue,
-        skills.nuxt
+        skills.nuxt,
+        skills.azure
       ],
       languages: [
         languages.javascript,
@@ -241,9 +246,14 @@ export const portfolioInfo: Portfolio[] = [
       features: {
         ko: [
           'Popbill API를 이용한 SMS 서비스',
-          'SMS Service 인증 로직 구현'
+          'Vuex를 이용하여 상태 관리',
+          'Azure Function을 이용하여 전송 API 개발',
         ],
-        en: [],
+        en: [
+          'SMS Service using Popbill API',
+          'State management using Vuex',
+          'SMS transfer API development with Azure Function',
+        ],
       }
     }
   },

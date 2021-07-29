@@ -8,7 +8,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index-[hash].js'
+    filename: 'app.js'
   },
   devServer: {
     host: '0.0.0.0',
