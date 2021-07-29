@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import * as React from 'react'
-import { useState, useRef } from 'react'
+import { useState, useRef, useContext } from 'react'
 import axios from 'axios'
 import './ContactForm.scss'
+import { MainContext } from '../providers/mainProvider'
 
 const API_URL = 'https://j8f18cozk9.execute-api.ap-northeast-2.amazonaws.com/default/ses'
 
@@ -14,6 +15,8 @@ const ContactForm = ({ isMobile }) => {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
+
+  const { language } = useContext(MainContext)
 
   const sendEmail = async () => {
     if (!checkText(NameInput) || !checkEmail() || !checkText(MessageInput)) {
@@ -70,7 +73,9 @@ const ContactForm = ({ isMobile }) => {
   return (
     <div className='contact_form'>
       <div className={`contact_form_field ${!isMobile && 'half'}`}>
-        <span className='contact_form_title'>Full Name</span>
+        <span className='contact_form_title'>
+          {language === 'ko' ? '이름' : 'Full Name'}
+        </span>
         <input 
           ref={NameInput} 
           type='text' 
@@ -78,7 +83,9 @@ const ContactForm = ({ isMobile }) => {
           onChange={() => checkText(NameInput)} />
       </div>
       <div className={`contact_form_field ${!isMobile && 'half'}`}>
-        <span className='contact_form_title'>Email</span>
+        <span className='contact_form_title'>
+          {language === 'ko' ? '이메일' : 'Email'}
+        </span>
         <input 
           ref={EmailInput} 
           type='text' 
@@ -86,7 +93,9 @@ const ContactForm = ({ isMobile }) => {
           onChange={checkEmail} />
       </div>
       <div className='contact_form_field'>
-        <span className='contact_form_title'>Message</span>
+        <span className='contact_form_title'>
+          {language === 'ko' ? '메시지' : 'Message'}
+        </span>
         <textarea 
           ref={MessageInput} 
           className='contact_form_input'
@@ -96,7 +105,8 @@ const ContactForm = ({ isMobile }) => {
       <div className='contact_form_field center'>
         <button className={`contact_form_button ${error && 'error'} ${success && 'success'}`} type='button' onClick={sendEmail} disabled={loading}>
           {
-            loading ? <i className='fas fa-spinner' /> : 'SEND MESSAGE'
+            // eslint-disable-next-line no-nested-ternary
+            loading ? <i className='fas fa-spinner' /> : (language === 'ko' ? '메시지 전송' : 'SEND MESSAGE')
           }
         </button>
       </div>

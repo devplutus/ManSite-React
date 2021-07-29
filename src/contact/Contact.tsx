@@ -7,27 +7,27 @@ import ContentTitle from '../common/ContentTitle'
 import ContactForm from './ContactForm'
 import { MainContext } from '../providers/mainProvider'
 
-const contactInfo = [
-  {
-    icon: 'fas fa-map-marked-alt',
-    value: 'Yongsan-gu, Seoul, Korea',
-  },
-  {
-    icon: 'far fa-envelope',
-    value: 'ji584738@gmail.com',
-  },
-  {
-    icon: 'fas fa-mobile-alt',
-    value: '+82 10-9878-3059',
-  },
-  {
-    icon: 'fab fa-github',
-    value: 'devplutus',
-  },
-]
-
 const Contact = ({ className }) => {
   const { isMobile, language } = useContext(MainContext)
+
+  const contactInfo = [
+    {
+      icon: 'fas fa-map-marked-alt',
+      value: language === 'ko' ? '서울특별시 용산구' : 'Yongsan-gu, Seoul, Korea',
+    },
+    {
+      icon: 'far fa-envelope',
+      value: 'ji584738@gmail.com',
+    },
+    {
+      icon: 'fas fa-mobile-alt',
+      value: language === 'ko' ? '010-9878-3059' : '+82 10-9878-3059',
+    },
+    {
+      icon: 'fab fa-github',
+      value: 'devplutus',
+    },
+  ]
 
   return (
     <div id="contact" className={className}>
