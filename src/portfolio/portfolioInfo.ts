@@ -286,7 +286,10 @@ export const portfolioInfo: Portfolio[] = [
           'Azure Blob Storage 연동',
           'PASS 인증 기능',
         ],
-        en: [],
+        en: [
+          'SystemLink to MS Dynamics CRM and Azure Blob Storage',
+          'Authentication with PASS',
+        ],
       }
     }
   },
@@ -323,7 +326,14 @@ export const portfolioInfo: Portfolio[] = [
           '사용자 권한 부여 기능',
           'Window ADFS 인증 기능',
         ],
-        en: [],
+        en: [
+          'SystemLink to PWC internal data',
+          'Fleet information create and modify form development',
+          'Import, Export and Validate Excel file',
+          'Excel form download for each item',
+          'User authorization',
+          'Authentication Window ADFS',
+        ],
       }
     }
   },
@@ -348,13 +358,18 @@ export const portfolioInfo: Portfolio[] = [
         languages.csharp
       ],
       features: {
-        ko: [],
-        en: [
+        ko: [
           'Socket 통신 구현',
           'Master&Slave 관계로 원격 컨트롤 기능',
-          '각 Slave 기계들의 상황을 모니터 할 수 있는 Master 화면 구현',
-          '각 Slave 기계들의 시작&종료 시간 설정 및 바로 시작&정지 기능',
-        ]
+          'Master 화면에서 각 Slave 기계들의 상황을 모니터',
+          '각 Slave 기계들의 시작 & 종료 시간 설정 및 바로 시작&정지 기능',
+        ],
+        en: [
+          'Implement socket communication',
+          'Remote Control from master machine to slave machine',
+          'Monitoring each slave machine\' state in master machine',
+          'Start, Stop and Set machine operation time each slave machine\' state in master machine',
+        ],
       }
     }
   },
@@ -384,13 +399,18 @@ export const portfolioInfo: Portfolio[] = [
         languages.cdplus
       ],
       features: {
-        ko: [],
-        en: [
+        ko: [
           'SerialPort를 사용하여 8개의 태양광 패널 측정 모듈 연동',
           '태양광 패널 측정을 위한 Arduino 프로그래밍',
           '각 모듈의 측정 데이터를 디테일하게 볼 수 있는 화면 구현',
           '측정 주기를 설정하여 각 주기마다 DB에 데이터 저장',
-        ]
+        ],
+        en: [
+          'SystemLink to 8 of PV panel measurement module using serialport',
+          'Arduino programming for PV panel measurement',
+          'Window Application to monitoring measured data development',
+          'Save to DataBase per interval setting measurement interval'
+        ],
       }
     }
   },
@@ -418,14 +438,20 @@ export const portfolioInfo: Portfolio[] = [
         languages.javascript
       ],
       features: {
-        ko: [],
-        en: [
+        ko: [
           '디자인된 이미지 퍼블리싱',
           '결제 모듈 연동',
           '룰렛 이벤트 개발',
           '출석체크 이벤트 개발',
           '유저 등급 기능',
-        ]
+        ],
+        en: [
+          'Publishing designed image',
+          'SystemLink to payment module',
+          'Roulette event development',
+          'Attendance check development',
+          'User Level feature',
+        ],
       }
     }
   },
