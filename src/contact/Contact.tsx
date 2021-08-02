@@ -24,7 +24,7 @@ const Contact = ({ className }) => {
       value: language === 'ko' ? '010-9878-3059' : '+82 10-9878-3059',
     },
     {
-      icon: 'fab fa-github',
+      icon: 'fab fa-git',
       value: 'devplutus',
     },
   ]

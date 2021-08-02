@@ -5,31 +5,38 @@ import './Menu.scss'
 
 const menuItems = [
   {
-    icon: 'fa-address-card',
+    icon: 'fas fa-address-card',
     title: {
       ko: '프로필',
       en: 'Profile'
     },
   },
   {
-    icon: 'fa-file-invoice',
+    icon: 'fas fa-file-invoice',
     title: {
       ko: '이력서',
       en: 'Resume',
     }
   },
   {
-    icon: 'fa-pencil-ruler',
+    icon: 'fas fa-pencil-ruler',
     title: {
       ko: '포트폴리오',
       en: 'Portfolio',
     }
   },
   {
-    icon: 'fa-mobile-alt',
+    icon: 'fas fa-mobile-alt',
     title: {
       ko: '연락처',
       en: 'Contact',
+    }
+  },
+  {
+    icon: 'fab fa-github',
+    title: {
+      ko: '깃허브',
+      en: 'Github',
     }
   },
 ]
@@ -160,7 +167,7 @@ const Menu = () => {
                 moveMenu(index)
               }}
             >
-              <i className={`fas ${item.icon}`} />
+              <i className={item.icon} />
               <span>{item.title[language].toUpperCase()}</span>
             </div>
           )
@@ -171,7 +178,7 @@ const Menu = () => {
           {menuItems.map((item) => {
             return (
               <div className="item" key={`menuItem${item.icon}`}>
-                <i className={`fas ${item.icon}`} />
+                <i className={item.icon} />
                 <span>{item.title[language].toUpperCase()}</span>
               </div>
             )
