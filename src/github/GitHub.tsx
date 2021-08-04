@@ -65,7 +65,7 @@ const GitHub = ({ className }) => {
         `,
       },
       headers: {
-        Authorization: GIT_API_TOKEN,
+        Authorization: `token ${GIT_API_TOKEN}`,
       },
     })
 
