@@ -18,7 +18,7 @@ jobs:
 
       - name: Create .env File
         env:
-          GIT_ACCESS_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
+          GIT_ACCESS_TOKEN: '${{ secrets.GIT_ACCESS_TOKEN }}'
         run: |
           printf GIT_API_TOKEN='$GIT_ACCESS_TOKEN' > .env
       
