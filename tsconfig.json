@@ -5,5 +5,5 @@
   "include": [
     "custom.d.ts",
     "src"
-  ]
+  ],
 }

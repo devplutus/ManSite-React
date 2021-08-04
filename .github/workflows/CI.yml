@@ -13,8 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: git clone
+      - name: Git clone
         uses: actions/checkout@v2
+
+      - name: Create .env File
+        env:
+          GIT_ACCESS_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
+        run: |
+          printf GIT_API_TOKEN='$GIT_ACCESS_TOKEN' > .env
       
       - name: Install Packages
         run: yarn install

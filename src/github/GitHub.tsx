@@ -22,7 +22,7 @@ interface Contribution {
 }
 
 const GIT_API_URL = 'https://api.github.com/graphql'
-const GIT_API_TOKEN = 'token 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'
+const { GIT_API_TOKEN } = process.env
 
 const GitHub = ({ className }) => {
   const [contributions, setContributions] = useState<Contribution>({
@@ -93,7 +93,7 @@ const GitHub = ({ className }) => {
       <ContentTitle title={language === 'ko' ? '깃허브' : 'GITHUB'} />
       <div className="github_container">
         <div className="github_sub_title">
-          Contributions
+          { language === 'ko' ? '활동' : 'Contributions'}
         </div>
         <div className="github_tree">
           {Array(Math.ceil(contributions.days.length / 7))

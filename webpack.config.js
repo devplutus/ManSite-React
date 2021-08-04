@@ -2,6 +2,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
+const { pathToFileURL } = require('url')
 
 module.exports = {
   mode: 'development',
@@ -50,6 +52,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new Dotenv({
+      path: path.resolve(__dirname, './.env')
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
       favicon: path.resolve(__dirname, 'public/favicon.ico'),
