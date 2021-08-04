@@ -5,12 +5,13 @@ import './App.scss'
 import { MainContext } from './providers/mainProvider'
 
 import MoveBackground from './common/MoveBackground'
+import LanguageToggle from './common/LanguageToggle'
 import Profile from './profile/Profile'
 import Menu from './common/Menu'
 import Resume from './resume/Resume'
 import Portfolio from './portfolio/Portfolio'
 import Contact from './contact/Contact'
-import LanguageToggle from './common/LanguageToggle'
+import GitHub from './github/GitHub'
 
 const App = () => {
   const ContentDiv = useRef()
@@ -30,6 +31,7 @@ const App = () => {
               <Resume className="content" />
               <Portfolio className="content" />
               <Contact className="content" />
+              <GitHub className="content" />
             </div>
           </div>
         ) : (
@@ -40,7 +42,7 @@ const App = () => {
             <Profile />
             <Resume className="content" />
             <Portfolio className="content" />
-            <Contact className="content" />
+            <GitHub className="content" />
           </div>
           </>
         )}

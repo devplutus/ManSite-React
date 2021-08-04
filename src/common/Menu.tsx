@@ -70,6 +70,7 @@ const Menu = () => {
       resume: document.getElementById('resume'),
       portfolio: document.getElementById('portfolio'),
       contact: document.getElementById('contact'),
+      github: document.getElementById('github'),
     }
 
     if (!isMobile) {
