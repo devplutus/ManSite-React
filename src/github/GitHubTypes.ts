@@ -12,7 +12,7 @@ export interface Contribution {
 }
 
 export interface Commit {
-  repositoryID: number
+  repositoryIndex: number
   date: Date
   message: string
 }
@@ -23,7 +23,6 @@ export interface Language {
 }
 
 export interface Repository {
-  id: number
   name: string
   languages: Language[]
 }

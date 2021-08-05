@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import './GitHubCommits.scss'
@@ -7,8 +8,8 @@ import axios from 'axios'
 import { Language, Repository, Commit } from './GitHubTypes'
 
 const GitHubcommits = ({ url, token }) => {
-  const [commits, setCommits] = useState<Commit[]>()
-  const [repositories, setRepositories] = useState<Repository[]>()
+  const [commits, setCommits] = useState<Commit[]>([])
+  const [repositories, setRepositories] = useState<Repository[]>([])
 
   const getCommits = async () => {
     const { data } = await axios({
@@ -56,10 +57,9 @@ const GitHubcommits = ({ url, token }) => {
       const newRepositories: Repository[] = []
       const { repositories } = data.data.user
 
-      repositories.nodes.forEach((repo, id) => {
+      repositories.nodes.forEach((repo, i) => {
         // Create New Repository
         const newRepo:Repository = {
-          id,
           languages: [],
           name: repo.name
         }
@@ -71,7 +71,7 @@ const GitHubcommits = ({ url, token }) => {
 
         // Commits
         repo.defaultBranchRef.target.history.nodes.forEach(({ committedDate: date, message }) => {
-          newCommits.push({ repositoryID: id, date, message })
+          newCommits.push({ repositoryIndex: i, date, message })
         })
 
         newRepositories.push(newRepo)
@@ -82,8 +82,6 @@ const GitHubcommits = ({ url, token }) => {
 
       setRepositories(newRepositories)
       setCommits(newCommits)
-      console.log(newCommits)
-      console.log(newRepositories)
     }
   }
 
@@ -92,8 +90,19 @@ const GitHubcommits = ({ url, token }) => {
   }, [])
 
   return (
-    <div>
-      Commits
+    <div className="github_history">
+      {
+        commits.map((commit, i) => {
+          return (
+            <div key={`history_${i}`}>
+              <div className='history_date'>
+                {commit.date}
+              </div>
+              {commit.message}
+            </div>
+          )
+        })
+      }
     </div>
   )
 }
