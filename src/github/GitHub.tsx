@@ -29,7 +29,7 @@ const GitHub = ({ className }) => {
         <GitHubContributions url={GIT_API_URL} token={GIT_API_TOKEN} />
       </div>
 
-      <div className="github_container">
+      <div className="github_container" style={{paddingBottom: '0'}}>
         <div className="github_sub_title">
             { language === 'ko' ? '최근 커밋' : 'Lately Commits'}
         </div>

@@ -13,7 +13,7 @@ export interface Contribution {
 
 export interface Commit {
   repositoryIndex: number
-  date: Date
+  date: string
   message: string
 }
 

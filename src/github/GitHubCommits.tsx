@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react'
 import './GitHubCommits.scss'
 
 import axios from 'axios'
+import * as moment from 'moment'
 
-import { Language, Repository, Commit } from './GitHubTypes'
+import { Repository, Commit } from './GitHubTypes'
 
 const GitHubcommits = ({ url, token }) => {
+
   const [commits, setCommits] = useState<Commit[]>([])
   const [repositories, setRepositories] = useState<Repository[]>([])
 
@@ -19,7 +21,7 @@ const GitHubcommits = ({ url, token }) => {
         query: `
           query test {
             user(login: "devplutus") {
-                repositories(first: 100, privacy: PUBLIC) {
+                repositories(first: 100, privacy: PUBLIC, isFork: false) {
                     nodes {
                         name
                         languages(first: 3) {
@@ -32,7 +34,7 @@ const GitHubcommits = ({ url, token }) => {
                         defaultBranchRef {
                             target {
                                 ...on Commit {
-                                    history(first: 10) {
+                                    history(first: 100) {
                                         nodes {
                                             message
                                             committedDate
@@ -70,7 +72,8 @@ const GitHubcommits = ({ url, token }) => {
         })
 
         // Commits
-        repo.defaultBranchRef.target.history.nodes.forEach(({ committedDate: date, message }) => {
+        repo.defaultBranchRef.target.history.nodes.forEach(({ committedDate, message }) => {
+          const date = moment(committedDate).format('YYYY-MM-DD HH:mm')
           newCommits.push({ repositoryIndex: i, date, message })
         })
 
@@ -90,15 +93,31 @@ const GitHubcommits = ({ url, token }) => {
   }, [])
 
   return (
-    <div className="github_history">
+    <div className="github_history_container">
       {
         commits.map((commit, i) => {
           return (
-            <div key={`history_${i}`}>
-              <div className='history_date'>
-                {commit.date}
+            <div key={`history_${i}`} className='github_history'>
+              <div className='history_repository'>
+                <div className='repository_name'>
+                  <span>
+                    {repositories[commit.repositoryIndex].name}
+                  </span>
+                  <div className='history_date'>
+                    {commit.date}
+                  </div>
+                </div>
               </div>
-              {commit.message}
+              <div className='history_message'>
+                {commit.message}
+              </div>
+              <div className='repository_languages'>
+                {repositories[commit.repositoryIndex].languages.map((language) => (
+                  <div key={language.name} className='repository_language' style={{background: language.color}}>
+                    {language.name}
+                  </div>
+                ))}
+              </div>
             </div>
           )
         })

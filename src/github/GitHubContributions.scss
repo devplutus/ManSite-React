@@ -1,9 +1,15 @@
+@import '../assets/scss/variables';
+
 .github_tree {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row-reverse;
   overflow: hidden;
+  border-radius: 10px;
+  padding: 5px;
+  background: #333e5ccc;
+  box-shadow: $box-shadow;
 }
 
 .tree_week {
@@ -16,4 +22,5 @@
   height: 13px;
   margin: 2px;
   border-radius: 3px;
+  border: 1px solid #404040;
 }
