@@ -26,3 +26,19 @@
   margin-bottom: 10px;
   text-align: left;
 }
+
+@include mobile {
+  #github {
+    overflow: visible;
+    height: auto;
+    padding: 20px;
+  }
+}
+
+@include tablet {
+  #github {
+    overflow: visible;
+    height: auto;
+    padding: 20px;
+  }
+}

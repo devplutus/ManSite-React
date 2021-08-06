@@ -42,6 +42,7 @@ const App = () => {
             <Profile />
             <Resume className="content" />
             <Portfolio className="content" />
+            <Contact className="content" />
             <GitHub className="content" />
           </div>
           </>

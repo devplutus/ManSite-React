@@ -1,3 +1,4 @@
+@import '../assets/scss/mixins';
 @import '../assets/scss/variables';
 
 .github_history_container {
@@ -81,5 +82,17 @@
 
   to {
     border: 15px solid $main-color;
+  }
+}
+
+@include mobile {
+  .github_history_container {
+    height: 500px;
+  }
+}
+
+@include tablet {
+  .github_history_container {
+    height: 500px;
   }
 }
