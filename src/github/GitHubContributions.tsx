@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import './GitHubContributions.scss'
 
 import axios from 'axios'
+import * as moment from 'moment'
+
 import { Contribution } from './GitHubTypes'
 
 const GitHubContributions = ({ url, token }) => {
@@ -74,6 +76,13 @@ const GitHubContributions = ({ url, token }) => {
           .fill(0)
           .map((_, i) => (
             <div key={`git_week_${i}`} className="tree_week">
+              <div className="tree_month">
+                {
+                  i * 7 >= 7 && contributions.days.slice(i * 7, (i + 1) * 7).filter((day) => moment(day.date).date() === 1).length === 1 ?
+                  moment(contributions.days.slice(i * 7, (i + 1) * 7).filter((day) => moment(day.date).date() === 1)[0].date).format('MMMM').substr(0, 3).toUpperCase() :
+                  ''
+                }
+              </div>
               {contributions.days.slice(i * 7, (i + 1) * 7).map((day) => {
                 return (
                   <div key={`git_day_${day.date}`} className="tree_day" style={{ background: day.color }} />

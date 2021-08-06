@@ -24,5 +24,6 @@ export interface Language {
 
 export interface Repository {
   name: string
+  url: string
   languages: Language[]
 }

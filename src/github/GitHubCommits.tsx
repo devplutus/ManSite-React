@@ -24,6 +24,7 @@ const GitHubcommits = ({ url, token }) => {
                 repositories(first: 100, privacy: PUBLIC, isFork: false) {
                     nodes {
                         name
+                        url
                         languages(first: 3) {
                           totalCount
                           nodes {
@@ -63,7 +64,8 @@ const GitHubcommits = ({ url, token }) => {
         // Create New Repository
         const newRepo:Repository = {
           languages: [],
-          name: repo.name
+          name: repo.name,
+          url: repo.url,
         }
 
         // languages
@@ -88,6 +90,10 @@ const GitHubcommits = ({ url, token }) => {
     }
   }
 
+  const goGit = (url: string) => {
+    window.open(url, '_blank')
+  }
+
   useEffect(() => {
     getCommits()
   }, [])
@@ -97,7 +103,11 @@ const GitHubcommits = ({ url, token }) => {
       {
         commits.map((commit, i) => {
           return (
-            <div key={`history_${i}`} className='github_history'>
+            <div 
+              role='button' 
+              key={`history_${i}`} 
+              className='github_history' 
+              onClick={() => goGit(repositories[commit.repositoryIndex].url)}>
               <div className='history_repository'>
                 <div className='repository_name'>
                   <span>

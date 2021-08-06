@@ -8,19 +8,21 @@
   background: #333e5ccc;
   overflow-y: scroll;
   box-shadow: $box-shadow;
-}
 
-.github_history_container::-webkit-scrollbar {
-  background: #eee;
-  width: 10px;
-  display: block;
-  border-radius: 50px;
-}
-
-.github_history_container::-webkit-scrollbar-thumb {
-  background: $main-color;
-  border-radius: 50px;
-  animation: scroll 1s infinite alternate;
+  &::-webkit-scrollbar {
+    background: #eee;
+    width: 16px;
+    display: block;
+    border-radius: 50px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $main-color;
+    border-radius: 50px;
+    border: 2.5px solid #eee;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 50px;
+  }
 }
 
 .github_history {
@@ -30,6 +32,11 @@
   border-radius: 10px;
   background: white;
   padding: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+  &:hover {
+    transform: translateY(3px);
+  }
 }
 
 .history_repository {
