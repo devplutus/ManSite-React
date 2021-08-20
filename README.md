@@ -19,7 +19,7 @@
 ## 배포
 - AWS S3
   - Route53 for DNS
-  - ACM for TLS
+  - CloudFront & ACM for TLS
   - SES for e-mail
   - Lambda for e-mail API
 - Git Actions for CI&CD
