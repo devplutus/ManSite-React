@@ -2,6 +2,7 @@ interface Resume {
   active: boolean
   startYear: number
   endYear: number
+  className?: string
   title: Language
   agency: Language
   desc: Language
@@ -25,14 +26,35 @@ interface Knowledge {
 export const experience: Resume[] = [
   {
     active: true,
-    startYear: 2020,
+    startYear: 2021,
     endYear: null,
+    className: 'coupang',
+    title: {
+      ko: '프론트엔드 개발자',
+      en: 'Front-End Developer'
+    },
+    agency: {
+      ko: 'Coupang',
+      en: 'Coupang',
+    },
+    desc: {
+      ko: ` <b>CMG(Coupang Media Group) CMP(Contents Management Platform) 팀</b>에서 재직 중.<br/>
+      <b>Vue.js</b> & <b>React.js</b>를 사용하여 기획전 및 브랜드존 Display & Admin 페이지 개발.`,
+      en: ` Currently at <b>CMG(Coupang Media Group) CMP(Contents Management Platform) Team</b> Developing Display and Admin websites using 
+      the <b>Vue.js</b> and <b>React.js</b>.`,
+    }
+  },
+  {
+    active: false,
+    startYear: 2020,
+    endYear: 2021,
+    className: 'qualisoft',
     title: {
       ko: '풀스택 개발자',
       en: 'FullStack Developer'
     },
     agency: {
-      ko: '(주)퀄리소프트',
+      ko: 'Qualisoft',
       en: 'Qualisoft',
     },
     desc: {
@@ -45,13 +67,14 @@ export const experience: Resume[] = [
     active: false,
     startYear: 2018,
     endYear: 2019,
+    className: 'tne',
     title: {
       ko: '윈도우 소프트웨어 개발자',
       en: 'Windows Software Programmer',
     },
     agency: {
-      ko: '(주)티엔이테크',
-      en: 'TNE Tech.',
+      ko: 'TNETECH CO.,LTD',
+      en: 'TNETECH CO.,LTD',
     },
     desc: {
       ko: `<b>.Net Winforms</b> and <b>WPF</b> 프레임워크를 사용하여 태양광 패널 성능 측정을 위한 윈도우 데스크탑 어플리케이션 개발. `,
@@ -60,14 +83,11 @@ export const experience: Resume[] = [
   },
 ]
 
-
-// 주언어 빼기
-
 export const educations: Resume[] = [
   {
-    active: true,
+    active: false,
     startYear: 2020,
-    endYear: null,
+    endYear: 2022,
     title: {
       ko: '고려사이버대학교',
       en: 'The Cyber University of Korea'
@@ -77,7 +97,7 @@ export const educations: Resume[] = [
       en: 'Seoul',
     },
     desc: {
-      ko: `<b>소프트웨어 공학과</b> 재학 중.`,
+      ko: `<b>소프트웨어 공학과</b> 학사 취득.`,
       en: `Bachelor's degree in <b>Software Engineering</b>.`,
     },
   },

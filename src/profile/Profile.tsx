@@ -191,7 +191,7 @@ const Profile = () => {
           style={{
             transform: `translate(${hoverPos.x}px, ${hoverPos.y}px)`
           }}>
-          You can call me Mann!
+          You can call me Rick!
         </span>
         <span>
           { language === 'ko' ? '정 병 만' : 'BYEONG-MAN JUNG'}

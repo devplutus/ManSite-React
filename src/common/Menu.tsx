@@ -124,7 +124,6 @@ const Menu = () => {
     if (isMove) return
 
     const menuHeight = menuContainer.current.clientHeight
-    console.log(menuId[page])
     const { bottom: currentBottom } = document.getElementById(menuId[page]).getBoundingClientRect()
 
     if (page !== 0) {

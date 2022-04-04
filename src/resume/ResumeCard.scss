@@ -1,5 +1,7 @@
 @import '../assets/scss/variables';
 @import '../assets/scss/mixins';
+$coupang-color: 90deg, rgba(88,49,24,1) 0%, rgba(88,49,24,1) 43%, rgba(247,86,46,1) 43%, rgba(247,86,46,1) 57%, rgba(255,196,1,1) 57%, rgba(255,196,1,1) 71.46%, rgba(137,204,47,1) 71.46%, rgba(137,204,47,1) 85.69%, rgba(51,180,221,1) 85.69%, rgba(51,180,221,1) 100%;
+$qualisoft-color: 90deg, rgba(65, 64, 153, 1) 0%, rgba(65, 64, 153, 1) 55%, rgba(140, 198, 63, 1) 55%, rgba(140, 198, 63, 1) 100%;
 
 .resume_card {
   margin: 10px;
@@ -9,6 +11,33 @@
   border-bottom-width: 5px;
   border-radius: 10px;
   text-align: left;
+
+  &.active {
+    animation: vibration 1.5s ease-in-out infinite alternate;
+  }
+
+  &.coupang {
+    .resume_card_agency {
+      display: inline-block;
+      background: linear-gradient($coupang-color);
+      -webkit-background-clip: text;
+      color: transparent;
+   }
+  }
+
+  &.qualisoft {
+    .resume_card_agency {
+      background: linear-gradient($qualisoft-color);
+      -webkit-background-clip: text;
+      color: transparent;
+   }
+  }
+
+  &.tne {
+    .resume_card_agency {
+      color: #252261;
+   }
+  }
 
   .resume_card_year {
     display: inline-block;
@@ -32,12 +61,26 @@
   }
 
   .resume_card_agency {
+    display: inline-block;
+    font-size: 0.9em;
+    font-weight: bold;
     margin-bottom: 10px;
-    font-weight: 200;
   }
 
   .resume_card_desc {
     font-size: 0.85em;
     line-height: 20px;
+  }
+}
+
+@keyframes vibration {
+  0% {
+   transform: translate(-3px, -3px);
+  }
+  10% {
+   transform: translate(3px, 3px);
+  }
+  20% {
+   transform: translate(0px, 0px);
   }
 }

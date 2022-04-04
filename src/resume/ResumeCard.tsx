@@ -4,12 +4,12 @@ import { useContext } from 'react'
 import { MainContext } from '../providers/mainProvider'
 import './ResumeCard.scss'
 
-const ResumeCard = ({ active, startYear, endYear, title, agency, desc }) => {
+const ResumeCard = ({ active, startYear, endYear, title, agency, desc, className='' }) => {
 
   const { language } = useContext(MainContext)
 
   return (
-    <div className="resume_card">
+    <div className={`resume_card ${className} ${active ? 'active' : ''}`}>
       <div className={`resume_card_year ${active ? 'active' : ''}`}>
         {startYear} ~ {endYear || (language === 'ko' ? '현재' : 'Present')}
       </div>
